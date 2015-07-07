@@ -1,0 +1,7 @@
+*.pyc
+runserver
+RUN
+settings.py
+settings_deployment.py
+python
+./static
