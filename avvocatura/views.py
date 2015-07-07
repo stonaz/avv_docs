@@ -28,7 +28,7 @@ def detail(request,id):
     #print settings.STATIC_ROOT
     #if settings.DEBUG == False :
     #    filename = settings.STATIC_ROOT + 'avvocatura/'+ server['hostname'] + '.png'
-    #    print filename
+    print filename
     
 
     #for server in collection.find():
