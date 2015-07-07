@@ -21,10 +21,10 @@ def detail(request,id):
     
     print server
     node = server.name
-    children = server.deps
+    deps = server.deps
     filename = 'avvocatura/static/avvocatura/' + node + '.png'
     context_filename = 'avvocatura/' + node + '.png'
-    print children
+    print deps
     #print settings.STATIC_ROOT
     #if settings.DEBUG == False :
     #    filename = settings.STATIC_ROOT + 'avvocatura/'+ server['hostname'] + '.png'
@@ -36,16 +36,16 @@ def detail(request,id):
 
     G=pgv.AGraph(strict=False,directed=True)
     G.add_node(node,shape='box',style='filled',color=".7 .3 1.0") # adds node 'a'
-    for child in children:
-        print type(child)
-        if type(child) is dict:
-            print 'subchild found'
-            for child,subchildren in child.iteritems():
-                for subchild in subchildren:
-                    print type(subchild)
-                    G.add_edge(child,subchild)
-        #print child[1]
-        G.add_edge(node,child)
+    for dep in deps:
+        print type(dep)
+        if type(dep) is dict:
+            print 'subdep found'
+            for dep,subdeps in dep.iteritems():
+                for subdep in subdeps:
+                    print type(subdep)
+                    G.add_edge(dep,subdep)
+        #print dep[1]
+        G.add_edge(node,dep)
     G.layout(prog='dot')    
     G.draw(filename)
     G.write("postgres.dot")
