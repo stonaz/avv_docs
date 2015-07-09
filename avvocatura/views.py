@@ -16,15 +16,15 @@ def detail(request,id):
     #client = MongoClient()
     #db = client.test
     #collection = db.avvocatura
-    print id
     server = Server.objects.get(id=id)
     
     print server
     node = server.name
     deps = server.deps
+    desc = server.desc
     filename = 'avvocatura/static/avvocatura/' + node + '.png'
     context_filename = 'avvocatura/' + node + '.png'
-    print deps
+    print desc
     #print settings.STATIC_ROOT
     #if settings.DEBUG == False :
     #    filename = settings.STATIC_ROOT + 'avvocatura/'+ server['hostname'] + '.png'
@@ -49,5 +49,5 @@ def detail(request,id):
     G.layout(prog='dot')    
     G.draw(filename)
     G.write("postgres.dot")
-    context = {'host_list': host_list,'filename':context_filename}
+    context = {'host_list': host_list,'filename':context_filename, 'server' : server}
     return render(request, 'avvocatura/showpng.html', context)

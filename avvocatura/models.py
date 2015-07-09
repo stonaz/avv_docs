@@ -10,5 +10,6 @@ class CategoryField(ListField):
     
 class Server(models.Model):
     name = models.CharField(max_length=100)
+    desc = models.CharField(max_length=100)
     IP = models.TextField()
     deps = CategoryField()
