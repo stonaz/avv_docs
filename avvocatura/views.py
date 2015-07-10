@@ -25,9 +25,9 @@ def detail(request,id):
     filename = 'avvocatura/static/avvocatura/' + node + '.png'
     context_filename = 'avvocatura/' + node + '.png'
     print desc
-    #print settings.STATIC_ROOT
-    #if settings.DEBUG == False :
-    #    filename = settings.STATIC_ROOT + 'avvocatura/'+ server['hostname'] + '.png'
+    print settings.STATIC_ROOT
+    if settings.DEBUG == False :
+        filename = settings.STATIC_ROOT + 'avvocatura/'+ server['hostname'] + '.png'
     print filename
     
 
