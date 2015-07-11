@@ -27,7 +27,7 @@ def detail(request,id):
     print desc
     print settings.STATIC_ROOT
     if settings.DEBUG == False :
-        filename = settings.STATIC_ROOT + 'avvocatura/'+ server['hostname'] + '.png'
+        filename = settings.STATIC_ROOT + 'avvocatura/'+ node + '.png'
     print filename
     
 
