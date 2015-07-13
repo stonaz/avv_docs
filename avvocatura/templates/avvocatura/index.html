@@ -20,7 +20,11 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container">
+        <div class="page-header">
+        <h1 class="title">Documentazione Avvocatura</h1>
+        <p>Sistema per la documentazione delle dipendenze tra i servizi di Avvocatura</p>
+      </div>
     <div class="row">
   <div class="col-md-4">
        {% if host_list %}
@@ -36,7 +40,6 @@
   <div class="col-md-8">
     
     <div>
-        <p>Sistema per la documentazione delle dipendenze tra i servizi di Avvocatura<br></p>
         <p> Selezionando uno dei sistemi della lista verrà visualizzato un grafico che ne mostra le dipendenze ed una descrizione</p>
         <p>I sistemi sono descritti come oggetti json all'interno di documenti MongoDB.<br>
         In particolare le dipendenze sono descritte con una lista avente come chiave 'deps'
@@ -65,6 +68,7 @@
 } 
         </pre>
     </div>
+    
     
   </div>
 </div>
