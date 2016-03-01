@@ -13,6 +13,8 @@
 
     <!-- Bootstrap -->
     <link href="{% static "avvocatura/bootstrap-3.3.5-dist/css/bootstrap.css" %}"rel="stylesheet">
+    <link href="{% static "avvocatura/css/main.css" %}"rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,11 +43,20 @@
   </div>
   <div class="col-md-8">
     
-    <img src="{% static  filename  %}" alt="My image"/>
-    <div>
+     <div>
         <strong>Descrizione:</strong><br>
         {{ server.desc }}
     </div>
+    <div class="imageBox">
+                    <p>Sistemi dipendenti da <strong>{{ server.name }}</strong></p>
+
+       <img src="{% static  filename  %}" alt="My image"/> 
+    </div>
+        <div class="imageBox">
+            <p>Sistemi da cui <strong>{{ server.name }}</strong> dipende</p>
+            <img src="{% static  filename2  %}" alt="My image"/> 
+    </div>
+   
     <div><p>
                  <br> <a href="/avvocatura">Torna alla pagina iniziale</a>
 
