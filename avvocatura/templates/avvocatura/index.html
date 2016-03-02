@@ -41,29 +41,36 @@
     
     <div>
         <p> Selezionando uno dei sistemi della lista verrà visualizzato un grafico che ne mostra le dipendenze ed una descrizione</p>
-        <p>I sistemi sono descritti come oggetti json all'interno di documenti MongoDB.<br>
-        In particolare le dipendenze sono descritte con una lista avente come chiave 'deps'
+        <p>Il sistema viene descritto come oggetto JSON all'interno di documenti MongoDB.<br>
+        I sistemi che dipendono da quello che viene descritto vengono inseriti in una lista avente come chiave <strong>'deps_down'</strong>.
+        I sistemi da cui dipende vengono invece inseriti in una lista avente come chiave <strong>'deps_up'</strong>.
         
         </p>
         <pre>
 {
-    'IP': '10.148.5.22',
-    'desc': 'Database di produzione',
-    'deps': [ 'NSI', 'Avvjboss',  ],
-    'name': 'dbserver.ads.it'
+    "_id": ObjectID("56d5ec30316c1aa263133835"),
+    "name": "postgres.ads.it",
+    "IP": "10.148.5.100",
+    "deps_down": [
+        "avvjboss2.ads.it",
+        "avvjboss1.ads.it"
+    ],
+    "deps_up": []
 }
 </pre>
         
-        Un ulteriore livello di dipendenze può essere aggiunto, inserendo all'interno della lista un oggetto json:
-        
+<br>        
         <pre>
-            {
-	'name': 'botero',
-	'IP': '10.148.5.204'
-	'desc': 'Servers AlFresco',
-	'deps': [ 'Console PEC', {
-			'dbserver.ads.it': [ 'NSI', 'Avvjboss' ]
-		} ]
+{
+    "_id": ObjectID("56d5e4b5316c1aa26313382f"),
+    "IP": "10.148.5.122",
+    "desc": "Server APA",
+    "deps_down": [],
+    "deps_up": [
+        "alfresco",
+        "postgres.ads.it"
+    ],
+    "name": "avvjboss2.ads.it"
 } 
         </pre>
     </div>
