@@ -1,5 +1,5 @@
 from django.contrib.admin import site, ModelAdmin
-from models import Server
+from models import Service
  
 def deps(instance):
     print type(instance.deps)
@@ -15,4 +15,4 @@ class ServerAdmin(ModelAdmin):
         return form
     list_display = ['name', deps]
  
-site.register(Server, ServerAdmin)
+site.register(Service, ServerAdmin)

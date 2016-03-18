@@ -26,7 +26,7 @@
   <body>
     <div class="container">
         <div class="page-header">
-  <h1>Documentazione Avvocatura: hosts<br><small>Sistema per la documentazione delle dipendenze tra i servizi di Avvocatura</small></h1>
+  <h1>Documentazione Avvocatura: Servizi<br><small>Sistema per la documentazione delle dipendenze tra i servizi di Avvocatura</small></h1>
 </div>
 
     <div class="row">
@@ -34,7 +34,7 @@
        {% if host_list %}
     <ul>
     {% for host in host_list %}
-        <li><a href="/avvocatura/{{ host.id }}/">{{ host.name }}</a></li>
+        <li><a href="/avvocatura/servizi/{{ host.id }}/">{{ host.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
@@ -45,7 +45,7 @@
     
      <div>
         <strong>Nome: </strong>{{ server.name }}<br>
-        <strong>IP: </strong>{{ server.IP }}<br>
+        <strong>Server: </strong>{{ server.IP }}<br>
         <strong>Descrizione: </strong>{{ server.desc }}<br>
         <strong>Note: </strong>{{ server.note }}<br><br>
         <strong>Servizi: </strong>{% for service in server.services %}
@@ -53,15 +53,15 @@
 {% endfor %}<br><br>
 
     </div>
-<!--    <div class="imageBox">
-                    <p>Sistemi dipendenti da <strong>{{ server.name }}</strong></p>
+    <div class="imageBox">
+                    <p>Servizi dipendenti da <strong>{{ server.name }}</strong></p>
 
        <img src="{% static  filename  %}" alt="My image"/> 
     </div>
         <div class="imageBox">
-            <p>Sistemi da cui <strong>{{ server.name }}</strong> dipende</p>
+            <p>Servizi da cui <strong>{{ server.name }}</strong> dipende</p>
             <img src="{% static  filename2  %}" alt="My image"/> 
-    </div>-->
+    </div>
    
     <div><p>
                  <br> <a href="/avvocatura">Torna alla pagina iniziale</a>
