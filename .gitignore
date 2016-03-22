@@ -1,4 +1,5 @@
 *.pyc
+*.png
 runserver
 RUN
 settings.py
