@@ -49,7 +49,15 @@
     
      <div>
         <strong>Nome: </strong>{{ service.name }}<br>
-        <strong>Server: </strong>{{ service.server }}<br>
+        <strong>Server: </strong>
+        {% for host in host_list %}
+        {% if host.id == "not present" %}
+    {{ host.name }},
+    {% else %}
+    <a href="/avvocatura/hosts/{{ host.id }}/">{{ host.name }}</a>,
+    {% endif %}
+{% endfor %}
+<br>
         <strong>Descrizione: </strong>{{ service.desc }}<br>
         <strong>Note: </strong>{{ service.note }}<br><br>
 <br>
