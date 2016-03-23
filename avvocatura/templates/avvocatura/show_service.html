@@ -26,15 +26,19 @@
   <body>
     <div class="container">
         <div class="page-header">
-  <h1>Documentazione Avvocatura: Servizi<br><small>Sistema per la documentazione delle dipendenze tra i servizi di Avvocatura</small></h1>
+  <h1>Documentazione Avvocatura: Servizi<br></h1>
 </div>
 
     <div class="row">
   <div class="col-md-4">
-       {% if host_list %}
+       {% if service_list %}
     <ul>
-    {% for host in host_list %}
-        <li><a href="/avvocatura/servizi/{{ host.id }}/">{{ host.name }}</a></li>
+    {% for s in service_list %}
+      {% if s.name == service.name %}
+      <li><a href="/avvocatura/servizi/{{ s.id }}/"><span class="activeItem">{{ s.name }}</span></a></li>
+      {% else %}
+        <li><a href="/avvocatura/servizi/{{ s.id }}/">{{ s.name }}</a></li>
+        {% endif %}
     {% endfor %}
     </ul>
 {% else %}
@@ -44,22 +48,20 @@
   <div class="col-md-8">
     
      <div>
-        <strong>Nome: </strong>{{ server.name }}<br>
-        <strong>Server: </strong>{{ server.IP }}<br>
-        <strong>Descrizione: </strong>{{ server.desc }}<br>
-        <strong>Note: </strong>{{ server.note }}<br><br>
-        <strong>Servizi: </strong>{% for service in server.services %}
-    {{ service }},
-{% endfor %}<br><br>
+        <strong>Nome: </strong>{{ service.name }}<br>
+        <strong>Server: </strong>{{ service.server }}<br>
+        <strong>Descrizione: </strong>{{ service.desc }}<br>
+        <strong>Note: </strong>{{ service.note }}<br><br>
+<br>
 
     </div>
     <div class="imageBox">
-                    <p>Servizi dipendenti da <strong>{{ server.name }}</strong></p>
+                    <p>Servizi dipendenti da <strong>{{ service.name }}</strong></p>
 
        <img src="{% static  filename  %}" alt="My image"/> 
     </div>
         <div class="imageBox">
-            <p>Servizi da cui <strong>{{ server.name }}</strong> dipende</p>
+            <p>Servizi da cui <strong>{{ service.name }}</strong> dipende</p>
             <img src="{% static  filename2  %}" alt="My image"/> 
     </div>
    

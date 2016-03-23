@@ -22,15 +22,14 @@
   <body>
     <div class="container">
         <div class="page-header">
-        <h1 class="title">Documentazione Avvocatura: servizi</h1>
-        <p>Sistema per la documentazione delle dipendenze tra i servizi di Avvocatura</p>
+        <h1 class="title">Documentazione Avvocatura: Servizi</h1>
       </div>
     <div class="row">
   <div class="col-md-4">
        {% if services_list %}
     <ul>
     {% for service in services_list %}
-        <li><a href="servizi/{{ service.id }}/">{{ service.name }}</a></li>
+        <li><a href="{{ service.id }}/">{{ service.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
@@ -40,39 +39,8 @@
   <div class="col-md-8">
     
     <div>
-        <p> Selezionando uno dei sistemi della lista verrà visualizzato un grafico che ne mostra le dipendenze ed una descrizione</p>
-        <p>Il sistema viene descritto come oggetto JSON all'interno di documenti MongoDB.<br>
-        I sistemi che dipendono da quello che viene descritto vengono inseriti in una lista avente come chiave <strong>'deps_down'</strong>.
-        I sistemi da cui dipende vengono invece inseriti in una lista avente come chiave <strong>'deps_up'</strong>.
-        
-        </p>
-        <pre>
-{
-    "_id": ObjectID("56d5ec30316c1aa263133835"),
-    "name": "postgres.ads.it",
-    "IP": "10.148.5.100",
-    "deps_down": [
-        "avvjboss2.ads.it",
-        "avvjboss1.ads.it"
-    ],
-    "deps_up": []
-}
-</pre>
-        
-<br>        
-        <pre>
-{
-    "_id": ObjectID("56d5e4b5316c1aa26313382f"),
-    "IP": "10.148.5.122",
-    "desc": "Server APA",
-    "deps_down": [],
-    "deps_up": [
-        "alfresco",
-        "postgres.ads.it"
-    ],
-    "name": "avvjboss2.ads.it"
-} 
-        </pre>
+        <p> Selezionare uno dei servizi dalla lista per visualizzarne la descrizione e le dipendenze</p>
+      
     </div>
     
     

@@ -14,10 +14,15 @@ def get_or_none(classmodel, **kwargs):
         #print 'non trovato nel DB'
         return None
 
-def hosts_index(request):
+def index(request):
     host_list = Host.objects.all()
     context = {'host_list': host_list}
     return render(request, 'avvocatura/index.html', context)
+
+def hosts_index(request):
+    host_list = Host.objects.all()
+    context = {'host_list': host_list}
+    return render(request, 'avvocatura/hosts_index.html', context)
 
 def servizi_index(request):
     services_list = Service.objects.all()
@@ -58,21 +63,29 @@ def DrawDepsUp(dep,node,graph):
     e.attr['color']='green'
 
 
-def detail(request,id):
+def host_detail(request,id):
     host_list = Host.objects.all()
     host = Host.objects.get(id=id)  
     node = host.name
-    desc = host.desc
-    filename = 'avvocatura/static/avvocatura/' + node + '_deps_down.png'
-    context_filename = 'avvocatura/' + node + '_deps_down.png'
-    filename2 = 'avvocatura/static/avvocatura/' + node + '_deps_up.png'
-    context_filename2 = 'avvocatura/' + node + '_deps_up.png'
-    context = {'host_list': host_list,'filename':context_filename, 'filename2':context_filename2,'server' : host}  
+    services = host.services
+    service_list=[]
+    for service in services:
+        s={}
+        s['name']=service
+        
+        service_details = get_or_none(Service,name=service)
+        if service_details is not None:
+            s['id']=service_details.id
+        else:
+            s['id']="not present"
+        service_list.append(s)
+    print service_list
+    context = {'host_list': host_list,'server' : host, 'service_list':service_list}  
     return render(request, 'avvocatura/show_host.html', context)
 
 
 def service_detail(request,id):
-    host_list = Service.objects.all()
+    service_list = Service.objects.all()
     service = Service.objects.get(id=id)
     deps_list= []
     node = service.name
@@ -107,5 +120,5 @@ def service_detail(request,id):
     G2.layout(prog='dot')    
     G2.draw(filename2)
     
-    context = {'host_list': host_list,'filename':context_filename, 'filename2':context_filename2,'server' : service}  
+    context = {'service_list': service_list,'filename':context_filename, 'filename2':context_filename2,'service' : service}  
     return render(request, 'avvocatura/show_service.html', context)

@@ -3,3 +3,8 @@
     margin-top: 5px;
     padding: 5px;
 }
+
+.activeItem{
+    font-size: larger;
+    font-weight: bold;
+}

@@ -22,22 +22,26 @@
   <body>
     <div class="container">
         <div class="page-header">
-        <h1 class="title">Documentazione Avvocatura</h1>
-        <h3>Sistema per la documentazione delle dipendenze tra i servizi di Avvocatura</h3>
+        <h1 class="title">Documentazione Avvocatura: hosts</h1>
       </div>
     <div class="row">
   <div class="col-md-4">
-       
+       {% if host_list %}
     <ul>
-    
-        <li><a href="hosts">Hosts</a></li>
-        <li><a href="servizi">Servizi</a></li>
+    {% for host in host_list %}
+        <li><a href="{{ host.id }}/">{{ host.name }}</a></li>
+    {% endfor %}
     </ul>
-
+{% else %}
+    <p>No hosts are available.</p>
+{% endif %}
   </div>
   <div class="col-md-8">
     
-
+    <div>
+        <p> Selezionare un host dalla lista per visualizzarne la descrizione</p>
+      
+    </div>
     
     
   </div>
