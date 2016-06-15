@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from models import Host,Service
+from ..models import Host,Service
 
 
 def get_or_none(classmodel, **kwargs):

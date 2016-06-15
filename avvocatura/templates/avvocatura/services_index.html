@@ -29,7 +29,7 @@
        {% if services_list %}
     <ul>
     {% for service in services_list %}
-        <li><a href="{{ service.id }}/">{{ service.name }}</a></li>
+        <li><a href="graph/{{ service.id }}/">{{ service.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

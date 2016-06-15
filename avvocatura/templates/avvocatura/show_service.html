@@ -35,9 +35,9 @@
     <ul>
     {% for s in service_list %}
       {% if s.name == service.name %}
-      <li><a href="/avvocatura/servizi/{{ s.id }}/"><span class="activeItem">{{ s.name }}</span></a></li>
+      <li><a href="/avvocatura/servizi/graph/{{ s.id }}/"><span class="activeItem">{{ s.name }}</span></a></li>
       {% else %}
-        <li><a href="/avvocatura/servizi/{{ s.id }}/">{{ s.name }}</a></li>
+        <li><a href="/avvocatura/servizi/graph/{{ s.id }}/">{{ s.name }}</a></li>
         {% endif %}
     {% endfor %}
     </ul>
@@ -54,7 +54,7 @@
         {% if host.id == "not present" %}
     {{ host.name }},
     {% else %}
-    <a href="/avvocatura/hosts/{{ host.id }}/">{{ host.name }}</a>,
+    <a href="/avvocatura/hosts/graph/{{ host.id }}/">{{ host.name }}</a>,
     {% endif %}
 {% endfor %}
 <br>

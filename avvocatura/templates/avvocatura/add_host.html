@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
       {% load static %}
 <html lang="en">
@@ -22,14 +21,14 @@
   <body>
     <div class="container">
         <div class="page-header">
-        <h1 class="title">Documentazione Avvocatura: hosts</h1>
+        <h1 class="title">Documentazione Avvocatura: Aggiungi host</h1>
       </div>
     <div class="row">
   <div class="col-md-4">
-       {% if host_list %}
+       {% if services_list %}
     <ul>
     {% for host in host_list %}
-        <li><a href="graph/{{ host.id }}/">{{ host.name }}</a></li>
+        <li><a href="{% url 'host_detail' host.id %}">{{host.name}}</a></li>
     {% endfor %}
     </ul>
 {% else %}
@@ -39,7 +38,22 @@
   <div class="col-md-8">
     
     <div>
-        <p> Selezionare un host dalla lista per visualizzarne la descrizione</p>
+        <h1>Inserimento host</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form class="form-horizontal" action="{% url 'host_add'  %}" method="post">
+    
+
+{% csrf_token %}
+Nome: <input name="name" type="text"><br>
+Servizi: <br><select multiple name="services">
+{% for service in services_list %}
+<option  value={{service.name}}> {{service.name}}</option>
+{% endfor %}
+</select><br>
+<input type="submit" value="Aggiungi" />
+</form>
       
     </div>
     
