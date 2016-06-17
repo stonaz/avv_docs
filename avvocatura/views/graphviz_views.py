@@ -91,21 +91,33 @@ def service_detail(request,id):
     node = service.name
     deps_down = service.deps_to
     deps_up = service.deps_by
-    server = service.server
-    print server
-    host_list=[]
-    for host in server:
-        print host
-        h={}
-        h['name']=host
-        
-        host_details = get_or_none(Host,name=host)
-        if host_details is not None:
-            h['id']=host_details.id
-        else:
-            h['id']="not present"
-            print h
-        host_list.append(h)
+    host = service.server
+    host_details = get_or_none(Host,name=host)
+    h={}
+    h['name']=host
+    if host_details is not None:
+        h['id']=host_details.id
+    else:
+        h['id']="not present"
+    print h
+    
+    
+    
+    #print server
+    #host_list=[]
+    #for host in hosts:
+    #    print host
+    #    h={}
+    #    h['name']=host
+    #    
+    #    host_details = get_or_none(Host,name=host)
+    #    if host_details is not None:
+    #        h['id']=host_details.id
+    #    else:
+    #        h['id']="not present"
+    #        print h
+    #    host_list.append(h)
+    #print host_list
     
     filename = 'avvocatura/static/avvocatura/' + node + '_deps_down.png'
     context_filename = 'avvocatura/' + node + '_deps_down.png'
@@ -132,5 +144,5 @@ def service_detail(request,id):
     G2.layout(prog='dot')    
     G2.draw(filename2)
     
-    context = {'service_list': service_list,'filename':context_filename, 'filename2':context_filename2,'service' : service, 'host_list':host_list}  
+    context = {'service_list': service_list,'filename':context_filename, 'filename2':context_filename2,'service' : service, 'host':h}  
     return render(request, 'avvocatura/show_service.html', context)

@@ -42,7 +42,7 @@
     {% endfor %}
     </ul>
 {% else %}
-    <p>No hosts are available.</p>
+    <p>No services are available.</p>
 {% endif %}
   </div>
   <div class="col-md-8">
@@ -50,13 +50,13 @@
      <div>
         <strong>Nome: </strong>{{ service.name }}<br>
         <strong>Server: </strong>
-        {% for host in host_list %}
-        {% if host.id == "not present" %}
-    {{ host.name }},
+        
+    {% if host.id == "not present" %}
+    {{ host.name }}
     {% else %}
-    <a href="/avvocatura/hosts/graph/{{ host.id }}/">{{ host.name }}</a>,
+    <a href="/avvocatura/hosts/graph/{{ host.id }}/">{{ host.name }}</a>
     {% endif %}
-{% endfor %}
+
 <br>
         <strong>Descrizione: </strong>{{ service.desc }}<br>
         <strong>Note: </strong>{{ service.note }}<br><br>
