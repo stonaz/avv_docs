@@ -21,7 +21,7 @@
   <body>
     <div class="container">
         <div class="page-header">
-        <h1 class="title">Documentazione Avvocatura: Aggiungi host</h1>
+        <h1 class="title">Documentazione Avvocatura</h1>
       </div>
     <div class="row">
   <div class="col-md-4">
@@ -38,25 +38,45 @@
   <div class="col-md-8">
     
     <div>
-        <h1>Inserimento host</h1>
+        <h1>Modifica host</h1>
 
 {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
 
-<form class="form-horizontal" action="{% url 'host_add'  %}" method="post">
-    
-
-{% csrf_token %}
-Nome: <input name="name" type="text"><br>
-IP: <input name="ip" type="text"><br>
-Descrizione: <input name="desc" type="text"><br>
-Servizi: <br><select multiple name="services">
-{% for service in services_list %}
-<option  value={{service.name}}> {{service.name}}</option>
+<form class="form-horizontal" action="{% url 'host_update' host.id %}" method="post">
+  {% csrf_token %}
+ <div class="form-group">
+<label for="name" class="col-sm-2 control-label">Nome</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" name="name"  placeholder="Nome host" value="{{host.name}}">
+    </div>
+<label for="name" class="col-sm-2 control-label">Indirizzo IP</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="ip" name="ip"  placeholder="Indirizzo IP" value="{{host.IP}}">
+    </div>
+<label for="name" class="col-sm-2 control-label">Descrizione</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="desc" name="desc"  placeholder="Descrizione" value="{{host.desc}}">
+    </div>
+<label for="name" class="col-sm-2 control-label">Servizi</label>
+    <div class="col-sm-10">
+      <select multiple name="services">
+{% for service in host_services_list %}
+<option  value={{service.name}}
+{% if service.selected %} selected {% endif %}
+> {{service.name}}
+</option>
 {% endfor %}
-</select><br>
-<input type="submit" value="Aggiungi" />
+      </select>
+    </div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Modifica host</button>
+    </div>
+  </div>
+  
 </form>
-      
+ </div>     
     </div>
     
     

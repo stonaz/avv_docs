@@ -13,9 +13,8 @@ def host_add(request):
         name=request.POST['name']
         ip=request.POST['ip']
         desc=request.POST['desc']
-        services=request.POST['services']
         services = request.POST.getlist('services')
-        host=Host(name=name,services=services)
+        host=Host(name=name,services=services,IP=ip,desc=desc)
         host.save()
     context = {'services_list': services_list,'host_list': host_list}
     return render(request, 'avvocatura/add_host.html', context)
@@ -25,6 +24,41 @@ def service_add(request):
     context = {'host_list': host_list}
     return HttpResponse('not implemented yet')
 
+def host_update(request,id):
+    host = Host.objects.get(id=id)
+    message=""
+    if request.POST:
+        host.name=request.POST['name']
+        host.IP=request.POST['ip']
+        host.desc=request.POST['desc']
+        host.services = request.POST.getlist('services')
+        #host=Host(name=name,services=services,IP=ip,desc=desc)
+        host.save()
+        message="Host modificato"
+    services_list = Service.objects.all()
+    host_list = Host.objects.all()
+    
+    print host.services
+    host_services_list=[]
+    for service in services_list:
+        host_service = {}
+        host_service['name'] = service.name
+        if service and service.name in host.services:
+            print "found"
+            host_service['selected'] = 1
+        else:
+            host_service['selected'] = 0
+        host_services_list.append(host_service)
+           
+    print host_services_list       
+    context = {'host_services_list': host_services_list,'services_list': services_list,'host_list': host_list,'host':host,'message':message}
+    print message
+    return render(request, 'avvocatura/update_host.html', context)
+
+def service_update(request):
+    services_list = Service.objects.all()
+    host_list = Host.objects.all()
+    return HttpResponse('not implemented yet')
 
 #def get_or_none(classmodel, **kwargs):
 #    try:
