@@ -47,6 +47,8 @@
 
 {% csrf_token %}
 Nome: <input name="name" type="text"><br>
+IP: <input name="ip" type="text"><br>
+Descrizione: <input name="desc" type="text"><br>
 Servizi: <br><select multiple name="services">
 {% for service in services_list %}
 <option  value={{service.name}}> {{service.name}}</option>

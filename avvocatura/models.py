@@ -32,7 +32,7 @@ class Host(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=100)
-    server = CategoryField()
+    server = models.CharField(max_length=100)
     deps_by = CategoryField()
     port = models.CharField(max_length=100)
     service_type = models.CharField(max_length=100)

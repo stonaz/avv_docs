@@ -11,6 +11,8 @@ def host_add(request):
     host_list = Host.objects.all()
     if request.POST:
         name=request.POST['name']
+        ip=request.POST['ip']
+        desc=request.POST['desc']
         services=request.POST['services']
         services = request.POST.getlist('services')
         host=Host(name=name,services=services)
