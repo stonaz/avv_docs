@@ -7,6 +7,7 @@
 .activeItem{
     font-size: larger;
     font-weight: bold;
+    background-color: yellow;
 }
 
 .avv-content{
@@ -15,4 +16,9 @@
 
 .avv-sidebar{
     background-color: #CCCCCC;
+}
+
+.auth{
+    float: right;
+    text-decoration: underline;
 }

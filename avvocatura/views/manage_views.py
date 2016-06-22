@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from ..models import Host,Service
+from django.contrib.auth.decorators import login_required
+
 
 def host_add(request):
     services_list = Service.objects.all()
@@ -19,11 +21,22 @@ def host_add(request):
     context = {'services_list': services_list,'host_list': host_list}
     return render(request, 'avvocatura/add_host.html', context)
 
+@login_required
 def service_add(request):
     host_list = Host.objects.all()
-    context = {'host_list': host_list}
-    return HttpResponse('not implemented yet')
+    services_list = Service.objects.all()
+    if request.POST:
+        name=request.POST['name']
+        port=request.POST['port']
+        desc=request.POST['desc']
+        host = request.POST['host']
+        service_type = request.POST['service_type']
+        service=Service(name=name,port=port,server=host,desc=desc,service_type=service_type)
+        service.save()
+    context = {'services_list': services_list,'host_list': host_list}
+    return render(request, 'avvocatura/add_service.html', context)
 
+@login_required
 def host_update(request,id):
     host = Host.objects.get(id=id)
     message=""
@@ -51,10 +64,11 @@ def host_update(request,id):
         host_services_list.append(host_service)
            
     print host_services_list       
-    context = {'host_services_list': host_services_list,'services_list': services_list,'host_list': host_list,'host':host,'message':message}
+    context = {'host_services_list': host_services_list,'services_list': services_list,'host_list': host_list,'host_selected':host,'message':message}
     print message
     return render(request, 'avvocatura/update_host.html', context)
 
+@login_required
 def service_update(request):
     services_list = Service.objects.all()
     host_list = Host.objects.all()
