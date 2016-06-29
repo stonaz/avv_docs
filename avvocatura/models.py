@@ -33,13 +33,15 @@ class Host(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=100)
     server = models.CharField(max_length=100)
-    deps_by = CategoryField()
     port = models.CharField(max_length=100)
     service_type = models.CharField(max_length=100)
     desc = models.CharField(max_length=100)
+    documentation_url = models.CharField(max_length=100)
+    svn = models.CharField(max_length=100)
+    deploy = models.CharField(max_length=100)
     deps_to = CategoryField()
     deps_by = CategoryField()
-    so_user = models.CharField(max_length=100)
+    user = models.CharField(max_length=100)
     start = models.CharField(max_length=100)
     stop = models.CharField(max_length=100)
     

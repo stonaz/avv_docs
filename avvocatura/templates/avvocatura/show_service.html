@@ -27,8 +27,8 @@
   <div class="col-md-8 avv-content">
     
      <div>
-        <strong>Nome: </strong>{{ service.name }}<br>
-        <strong>Server: </strong>
+        <strong>Nome servizio: </strong>{{ service.name }}<br>
+        <strong>Host: </strong>
         
     {% if host.id == "not present" %}
     {{ host.name }}
@@ -37,8 +37,17 @@
     {% endif %}
 
 <br>
+        <strong>Tipologia servizio: </strong>{{ service.service_type }}<br>
         <strong>Descrizione: </strong>{{ service.desc }}<br>
-        <strong>Note: </strong>{{ service.note }}<br><br>
+        <strong>Url documentazione: </strong><a href="{{ service.documentation_url }}">{{ service.documentation_url }}</a><br>
+        <strong>Port: </strong>{{ service.port }}<br>
+        <strong>User: </strong>{{ service.user }}<br>
+        <strong>SVN: </strong>{{ service.svn }}<br>
+        <strong>Deploy: </strong><kbd>{{ service.deploy }}</kbd><br>
+        <strong>Start: </strong><a href="{{ service.start }}">{{ service.start }}</a><br>
+        <strong>Stop: </strong><a href="{{ service.stop }}">{{ service.stop }}</a><br>
+
+
 <br>
 
     </div>

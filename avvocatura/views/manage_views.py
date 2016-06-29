@@ -29,9 +29,17 @@ def service_add(request):
         name=request.POST['name']
         port=request.POST['port']
         desc=request.POST['desc']
+        documentation_url=request.POST['documentation_url']
         host = request.POST['host']
         service_type = request.POST['service_type']
-        service=Service(name=name,port=port,server=host,desc=desc,service_type=service_type)
+        svn = request.POST['svn']
+        deploy = request.POST['deploy']
+        start = request.POST['start']
+        stop = request.POST['stop']
+        user = request.POST['user']
+        deps_to = request.POST.getlist('deps_to')
+        deps_by = request.POST.getlist('deps_by')
+        service=Service(name=name,port=port,server=host,desc=desc,service_type=service_type,deps_to=deps_to,deps_by=deps_by,svn=svn,user=user,start=start,stop=stop,documentation_url=documentation_url,deploy=deploy )
         service.save()
     context = {'services_list': services_list,'host_list': host_list}
     return render(request, 'avvocatura/add_service.html', context)
@@ -69,10 +77,17 @@ def host_update(request,id):
     return render(request, 'avvocatura/update_host.html', context)
 
 @login_required
-def service_update(request):
+def service_update(request,id):
     services_list = Service.objects.all()
     host_list = Host.objects.all()
     return HttpResponse('not implemented yet')
+
+@login_required
+def manage_index(request):
+    context = {}
+    #services_list = Service.objects.all()
+    #host_list = Host.objects.all()
+    return render(request, 'avvocatura/manage_index.html', context)
 
 #def get_or_none(classmodel, **kwargs):
 #    try:

@@ -20,11 +20,9 @@
     </div>
 
     <ul>
-        <li><a href="hosts">Hosts</a></li>
-        <li><a href="servizi">Servizi</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="gestione">Gestione</a></li>
-        {% endif %}
+        <li><a href="{% url 'host_add' %}">Gestione Hosts</a></li>
+        <li><a href="{% url 'service_add' %}">Gestione Servizi</a></li>
+        
     </ul>
     </div>
   </div>

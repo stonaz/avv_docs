@@ -39,11 +39,16 @@
       <select class="form-control"  name="service_type">
 <option  value="Middleware"> Middleware</option>>
 <option  value="Software"> Software</option>>
+<option  value="Software"> Batch</option>>
       </select>
     </div>
 <label for="name" class="col-sm-2 control-label">Descrizione</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="desc" name="desc"  placeholder="Descrizione" >
+    </div>
+<label for="documentation_url" class="col-sm-2 control-label">URL doc</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="documentation_url" name="documentation_url"  placeholder="URL documentazione" >
     </div>
 <label for="name" class="col-sm-2 control-label">Host</label>
     <div class="col-sm-10">
@@ -65,6 +70,36 @@
 <label for="deploy" class="col-sm-2 control-label">Deploy</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="deploy" name="deploy"  placeholder="Deploy command" >
+    </div>
+<label for="user" class="col-sm-2 control-label">User</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="user" name="user"  placeholder="User" >
+    </div>
+<label for="start" class="col-sm-2 control-label">Start</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="start" name="start"  placeholder="link a documentazione stop" >
+    </div>
+<label for="stop" class="col-sm-2 control-label">Stop</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="stop" name="stop"  placeholder="link a documentazione start" >
+    </div>
+<label for="deps_by" class="col-sm-2 control-label">Servizi da cui dipende</label>
+    <div class="col-sm-10">
+      <select multiple name="deps_by">
+{% for service in services_list %}
+<option  value={{service.name}}> {{service.name}}
+</option>
+{% endfor %}
+      </select>
+    </div>
+<label for="deps_to" class="col-sm-2 control-label">Servizi dipendenti</label>
+    <div class="col-sm-10">
+      <select multiple name="deps_to">
+{% for service in services_list %}
+<option  value={{service.name}}> {{service.name}}
+</option>
+{% endfor %}
+      </select>
     </div>
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">Aggiungi il servizio</button>
