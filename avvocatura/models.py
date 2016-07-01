@@ -6,17 +6,6 @@ from .forms import StringListField
 class CategoryField(ListField):
     def formfield(self, **kwargs):
         return models.Field.formfield(self, StringListField, **kwargs)
- 
-    
-#class Server(models.Model):
-#    name = models.CharField(max_length=100)
-#    desc = models.CharField(max_length=100)
-#    IP = models.TextField()
-#    deps_down = CategoryField()
-#    deps_up = CategoryField()
-#    
-#    class Meta:
-#        ordering = ['name']
         
 class Host(models.Model):
     name = models.CharField(max_length=100)
@@ -32,7 +21,7 @@ class Host(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=100)
-    server = models.CharField(max_length=100)
+    host = models.CharField(max_length=100)
     port = models.CharField(max_length=100)
     service_type = models.CharField(max_length=100)
     desc = models.CharField(max_length=100)
