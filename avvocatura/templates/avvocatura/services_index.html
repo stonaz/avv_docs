@@ -3,12 +3,9 @@
       {% load static %}
 
     {% block content %}
-    <div class="container">
-        <div class="page-header">
-        <h1 class="title">Documentazione Avvocatura: Servizi</h1>
-      </div>
+
     <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-4 avv-sidebar">
        {% if services_list %}
     <ul>
     {% for service in services_list %}
@@ -19,7 +16,7 @@
     <p>No services are available.</p>
 {% endif %}
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8 avv-content">
     
     <div>
         <p> Selezionare uno dei servizi dalla lista per visualizzarne la descrizione e le dipendenze</p>

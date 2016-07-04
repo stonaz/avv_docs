@@ -3,10 +3,7 @@
       {% load static %}
 
     {% block content %}
-    <div class="container">
-        <div class="page-header">
-  <h1>Documentazione Avvocatura: Servizi<br></h1>
-</div>
+
 
     <div class="row">
   <div class="col-md-4 avv-sidebar">
@@ -14,9 +11,9 @@
     <ul>
     {% for s in service_list %}
       {% if s.name == service.name %}
-      <li><a href="/avvocatura/servizi/graph/{{ s.id }}/"><span class="activeItem">{{ s.name }}</span></a></li>
+      <li><a href="{% url 'service_detail' service.id %}"><span class="activeItem">{{ s.name }}</span></a></li>
       {% else %}
-        <li><a href="/avvocatura/servizi/graph/{{ s.id }}/">{{ s.name }}</a></li>
+        <li><a href="{% url 'service_detail' service.id %}">{{ s.name }}</a></li>
         {% endif %}
     {% endfor %}
     </ul>
@@ -33,7 +30,7 @@
     {% if host.id == "not present" %}
     {{ host.name }}
     {% else %}
-    <a href="/avvocatura/hosts/graph/{{ host.id }}/">{{ host.name }}</a>
+    <a href="{% url 'host_detail' host.id %}">{{ host.name }}</a>
     {% endif %}
 
 <br>
@@ -62,7 +59,8 @@
     </div>
    
     <div><p>
-                 <br> <a href="/avvocatura">Torna alla pagina iniziale</a>
+    <a href="{% url 'hosts_index' %}">Visualizza hosts</a><br>
+    <a href="{% url 'index' %}">Torna alla pagina iniziale</a>
 
     </p>
   

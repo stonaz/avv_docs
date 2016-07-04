@@ -3,12 +3,15 @@
       {% load static %}
 
     {% block content %}
-    <div class="container">
-        <div class="page-header">
-        <h1 class="title">Documentazione Avvocatura: Aggiungi servizio</h1>
-      </div>
+
     <div class="row">
   <div class="col-md-4 avv-sidebar">
+    <div class="menu">
+            
+              <a href="{% url 'service_add'  %}">Aggiungi servizio</a><br />
+              <a href="{% url 'host_add' %}">Gestisci hosts</a><br />
+              <a href="{% url 'index' %}">Home</a><br />
+    </div>
        {% if services_list %}
     <ul>
     {% for service in services_list %}

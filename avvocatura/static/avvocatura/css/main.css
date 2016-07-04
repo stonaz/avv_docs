@@ -21,4 +21,15 @@
 .auth{
     float: right;
     text-decoration: underline;
+    padding:3px;
+    margin:3px;
+    font-weight:bold;
+}
+
+.menu{
+    
+    text-decoration: underline;
+    padding:3px;
+    margin:3px;
+    font-weight:bold;
 }
