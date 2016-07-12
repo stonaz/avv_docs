@@ -15,6 +15,8 @@ urlpatterns = [
     url(r'^servizi/add/$', manage_views.service_add, name='service_add'),
     url(r'^hosts/update/(?P<id>[a-zA-Z0-9_]+)/$', manage_views.host_update, name='host_update'),
     url(r'^servizi/update/(?P<id>[a-zA-Z0-9_]+)/$', manage_views.service_update, name='service_update'),
+    url(r'^hosts/delete/(?P<id>[a-zA-Z0-9_]+)/$', manage_views.host_delete, name='host_delete'),
+    url(r'^servizi/delete/(?P<id>[a-zA-Z0-9_]+)/$', manage_views.service_delete, name='service_delete'),
 
     #url(r'^hosts/$', views.service_detail, name='service_detail'),
 

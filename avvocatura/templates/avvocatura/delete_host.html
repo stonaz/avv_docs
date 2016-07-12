@@ -1,0 +1,51 @@
+{% extends "avvocatura/base.html" %}
+    
+      {% load static %}
+
+    {% block content %}
+    
+    <div class="row">
+  <div class="col-md-4 avv-sidebar">
+<div class="menu">
+            
+              
+    <a href="{% url 'index'  %}" class="btn btn-default  active" role="button">Vai alla home</a>
+    <a href="{% url 'service_add'  %}" class="btn btn-default active" >Vai a gestione servizi</a><br>
+    <h3>Gestione hosts</h3>
+    <a href="{% url 'host_add'  %}" class="btn btn-default btn-sm active" >Aggiungi host</a>
+    </div>
+       {% if host_list %}
+    <table class="table">
+      
+    {% for host in host_list %}
+    
+      <tr>
+       <td><strong>{{host.name}}</strong></td>
+         <td><a href="{% url 'host_detail' host.id %}">Visualizza</a></td>
+        <td><a href="{% url 'host_update' host.id %}">Modifica</a></td>
+        <td><a href="{% url 'host_delete' host.id %}">Elimina</a></td>
+
+      </tr>
+      
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No hosts are available.</p>
+{% endif %}
+  </div>
+  <div class="col-md-8 avv-content">
+    
+    <div>
+
+{% if message %}<p class="text-danger""><strong>{{ message }}</strong></p>{% endif %}
+
+
+
+ </div>     
+    </div>
+    
+    
+  </div>
+</div>
+    </div>
+  {% endblock %}

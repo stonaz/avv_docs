@@ -6,7 +6,14 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from ..models import Host,Service
 from django.contrib.auth.decorators import login_required,user_passes_test
- 
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def manage_index(request):
+    context = {}
+    #services_list = Service.objects.all()
+    #host_list = Host.objects.all()
+    return render(request, 'avvocatura/manage_index.html', context) 
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -130,12 +137,35 @@ def service_update(request,id):
         context = {'service_deps_to_list': service_deps_to_list,'service_deps_by_list': service_deps_by_list,'services_list': services_list,'host_list': host_list,'service_selected':service_to_update,'message':message}
     print message
     return render(request, 'avvocatura/update_service.html', context)
-#return HttpResponse('not implemented yet')
 
 @login_required
-def manage_index(request):
-    context = {}
-    #services_list = Service.objects.all()
-    #host_list = Host.objects.all()
-    return render(request, 'avvocatura/manage_index.html', context)
+@user_passes_test(lambda u: u.is_superuser)
+def host_delete(request,id):
+    host = Host.objects.get(id=id)
+    host.delete()
+    message="Host eliminato"
+    services_list = Service.objects.all()
+    host_list = Host.objects.all()
+           
+    context = {'services_list': services_list,'host_list': host_list,'message':message}
+    return render(request, 'avvocatura/delete_host.html', context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def service_delete(request,id):
+    service = Service.objects.get(id=id)
+    message=""
+   
+    service.delete()
+    message="Servizio eliminato"
+    #print service.deps_by
+    services_list = Service.objects.all()
+    host_list = Host.objects.all()
+    
+    context = {'services_list': services_list,'host_list': host_list,'message':message}
+    print message
+    return render(request, 'avvocatura/delete_service.html', context)
+
+
+
 

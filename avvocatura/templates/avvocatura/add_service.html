@@ -20,8 +20,9 @@
     
       <tr>
        <td><strong>{{service.name}}</strong></td>
+       <td><a href="{% url 'service_detail' service.id %}">Visualizza</a></td>
         <td><a href="{% url 'service_update' service.id %}">Modifica</a></td>
-        <td><a href="{% url 'service_detail' service.id %}">Visualizza</a></td>
+        <td><a href="{% url 'service_delete' service.id %}">Elimina</a></td>
 
       </tr>
       

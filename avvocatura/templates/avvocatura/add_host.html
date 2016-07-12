@@ -20,8 +20,9 @@
     
       <tr>
        <td><strong>{{host.name}}</strong></td>
+         <td><a href="{% url 'host_detail' host.id %}">Visualizza</a></td>
         <td><a href="{% url 'host_update' host.id %}">Modifica</a></td>
-        <td><a href="{% url 'host_detail' host.id %}">Visualizza</a></td>
+        <td><a href="{% url 'host_delete' host.id %}">Elimina</a></td>
 
       </tr>
       

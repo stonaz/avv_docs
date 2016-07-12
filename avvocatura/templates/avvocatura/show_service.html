@@ -17,7 +17,7 @@
       {% if s.name == service.name %}
       <li><a href="{% url 'service_detail' service.id %}"><span class="activeItem">{{ s.name }}</span></a></li>
       {% else %}
-        <li><a href="{% url 'service_detail' service.id %}">{{ s.name }}</a></li>
+        <li><a href="{% url 'service_detail' s.id %}">{{ s.name }}</a></li>
         {% endif %}
     {% endfor %}
     </ul>
