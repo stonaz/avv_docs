@@ -28,8 +28,12 @@
 
 .menu{
     
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     padding:3px;
     margin:3px;
     font-weight:bold;
+}
+
+.menu a {
+    text-decoration:none;
 }

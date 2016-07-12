@@ -6,6 +6,9 @@
     
     <div class="row">
   <div class="col-md-4 avv-sidebar">
+     <a href="{% url 'index'  %}" class="btn btn-default  active" role="button">Vai alla home</a>
+    <a href="{% url 'servizi_index'  %}" class="btn btn-default active" >Visualizza servizi</a><br>
+  <h3>Hosts</h3>
        {% if host_list %}
     <ul>
     {% for host in host_list %}

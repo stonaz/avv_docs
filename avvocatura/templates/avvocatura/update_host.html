@@ -8,24 +8,26 @@
   <div class="col-md-4 avv-sidebar">
 <div class="menu">
             
-              <a href="{% url 'host_add'  %}">Aggiungi host</a><br />
-              <a href="{% url 'service_add' %}">Gestisci servizi</a><br />
-              <a href="{% url 'index' %}">Home</a><br />
+              
+    <a href="{% url 'index'  %}" class="btn btn-default  active" role="button">Vai alla home</a>
+    <a href="{% url 'service_add'  %}" class="btn btn-default active" >Vai a gestione servizi</a><br>
+    <h3>Gestione hosts</h3>
+    <a href="{% url 'host_add'  %}" class="btn btn-default btn-sm active" >Aggiungi host</a>
     </div>
        {% if host_list %}
-    <ul>
+    <table class="table">
       
     {% for host in host_list %}
     
-      <li>
-       <strong>{{host.name}}</strong> 
-        <a href="{% url 'host_update' host.id %}">Modifica</a>
-        <a href="{% url 'host_detail' host.id %}">Visualizza</a>
+      <tr>
+       <td><strong>{{host.name}}</strong></td>
+        <td><a href="{% url 'host_update' host.id %}">Modifica</a></td>
+        <td><a href="{% url 'host_detail' host.id %}">Visualizza</a></td>
 
-      </li>
+      </tr>
       
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No hosts are available.</p>
 {% endif %}
@@ -33,7 +35,7 @@
   <div class="col-md-8 avv-content">
     
     <div>
-        <h3>Modifica host <strong>{{host_selected.name}}</strong></h3>
+        <h4>Modifica host <span class="activeItem">{{host_selected.name}}</span></h4>
 
 {% if message %}<p class="text-success""><strong>{{ message }}</strong></p>{% endif %}
 
@@ -66,7 +68,7 @@
     </div>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Modifica host</button>
+      <button type="submit" class="btn btn-primary">Modifica host</button>
     </div>
   </div>  
 </form>

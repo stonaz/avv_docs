@@ -7,6 +7,10 @@
 
     <div class="row">
   <div class="col-md-4 avv-sidebar">
+    <a href="{% url 'index'  %}" class="btn btn-default  active" role="button">Vai alla home</a>
+    <a href="{% url 'hosts_index'  %}" class="btn btn-default active" >Visualizza hosts</a><br>
+    <h3>Servizi</h3>
+ 
        {% if service_list %}
     <ul>
     {% for s in service_list %}
@@ -58,11 +62,7 @@
             <img src="{% static  filename2  %}" alt="My image"/> 
     </div>
    
-    <div><p>
-    <a href="{% url 'hosts_index' %}">Visualizza hosts</a><br>
-    <a href="{% url 'index' %}">Torna alla pagina iniziale</a>
-
-    </p>
+    <div>
   
     </div>
 

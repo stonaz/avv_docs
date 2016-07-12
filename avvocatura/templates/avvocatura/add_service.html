@@ -7,17 +7,26 @@
     <div class="row">
   <div class="col-md-4 avv-sidebar">
     <div class="menu">
-            
-              <a href="{% url 'service_add'  %}">Aggiungi servizio</a><br />
-              <a href="{% url 'host_add' %}">Gestisci hosts</a><br />
-              <a href="{% url 'index' %}">Home</a><br />
+          <a href="{% url 'index'  %}" class="btn btn-default  active" role="button">Vai alla home</a>
+    <a href="{% url 'host_add'  %}" class="btn btn-default active" >Vai a gestione hosts</a><br>
+
+            <h3>Gestione servizi</h3>
+
     </div>
        {% if services_list %}
-    <ul>
+     <table class="table">
+      
     {% for service in services_list %}
-        <li><a href="{% url 'service_update' service.id %}">{{service.name}}</a></li>
+    
+      <tr>
+       <td><strong>{{service.name}}</strong></td>
+        <td><a href="{% url 'service_update' service.id %}">Modifica</a></td>
+        <td><a href="{% url 'service_detail' service.id %}">Visualizza</a></td>
+
+      </tr>
+      
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No services are available.</p>
 {% endif %}
@@ -25,7 +34,7 @@
   <div class="col-md-8 avv-content">
     
     <div>
-        <h1>Inserimento Servizio</h1>
+        <h4>Inserimento Servizio</h4>
 
 {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
 
@@ -105,7 +114,7 @@
       </select>
     </div>
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Aggiungi il servizio</button>
+      <button type="submit" class="btn btn-primary">Aggiungi il servizio</button>
     </div>
   </div>  
 </form>
