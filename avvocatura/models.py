@@ -11,9 +11,10 @@ class Host(models.Model):
     name = models.CharField(max_length=100)
     desc = models.CharField(max_length=100)
     IP = models.TextField()
-    deps_down = CategoryField()
-    deps_up = CategoryField()
     services = CategoryField()
+    
+    def __unicode__(self):
+        return self.name
     
     class Meta:
         ordering = ['name']
@@ -33,6 +34,9 @@ class Service(models.Model):
     user = models.CharField(max_length=100)
     start = models.CharField(max_length=100)
     stop = models.CharField(max_length=100)
+    
+    def __unicode__(self):
+        return self.name
     
     class Meta:
         ordering = ['name']
