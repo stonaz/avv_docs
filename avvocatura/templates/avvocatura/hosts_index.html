@@ -10,9 +10,9 @@
     <a href="{% url 'servizi_index'  %}" class="btn btn-default active" >Visualizza servizi</a><br>
   <h3>Hosts</h3>
        {% if host_list %}
-    <ul>
+    <ul class="list-group">
     {% for host in host_list %}
-        <li><a href="graph/{{ host.id }}/">{{ host.name }}</a></li>
+        <li class="list-group-item"><a href="graph/{{ host.id }}/">{{ host.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

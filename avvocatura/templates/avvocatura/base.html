@@ -24,7 +24,13 @@
         <div class="container">
         <div class="page-header ">
         <h3>Sistema per la documentazione delle dipendenze tra i servizi di Avvocatura</h3>
-        
+            <div class="auth">
+            {% if user.is_authenticated %}
+              <a href="/avvocatura/logout/">Logout</a><br />
+            {% else %}
+              <a href="/avvocatura/login/">Login</a><br />
+            {% endif %}
+    </div>
       </div>
     {% endblock %}
 {% block content %}

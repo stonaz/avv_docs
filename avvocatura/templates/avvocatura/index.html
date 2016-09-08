@@ -7,22 +7,16 @@
     <div class="row">
   <div class="col-md-4 avv-sidebar" >
   <div class="avv-sidebar">    
-    <div class="auth">
-            {% if user.is_authenticated %}
-              <a href="/avvocatura/logout/">Logout</a><br />
-            {% else %}
-              <a href="/avvocatura/login/">Login</a><br />
-            {% endif %}
-    </div>
 
-    <ul>
+
+    <ul class="list-group">
         {% if user.is_authenticated %}
-        <li><a href="{% url 'hosts_index' %}">Visualizza hosts</a></li>
-        <li><a href="{% url 'servizi_index' %}">Visualizza servizi</a></li>
+        <li class="list-group-item"><a href="{% url 'hosts_index' %}">Visualizza hosts</a></li>
+        <li class="list-group-item"><a href="{% url 'servizi_index' %}">Visualizza servizi</a></li>
         {% endif %}
         {% if user.is_superuser %}
-        <li><a href="{% url 'host_add' %}">Gestione Hosts</a></li>
-        <li><a href="{% url 'service_add' %}">Gestione Servizi</a></li>
+        <li class="list-group-item"><a href="{% url 'host_add' %}">Gestione Hosts</a></li>
+        <li class="list-group-item"><a href="{% url 'service_add' %}">Gestione Servizi</a></li>
         {% endif %}
     </ul>
     </div>

@@ -13,12 +13,12 @@
     <a href="{% url 'servizi_index'  %}" class="btn btn-default active" >Visualizza servizi</a><br>
   <h3>Hosts</h3>
        {% if host_list %}
-    <ul>
+    <ul class="list-group">
     {% for host in host_list %}
         {% if host.name == server.name %}
-      <li><a href="{% url 'host_detail' host.id %}"><span class="activeItem">{{ host.name }}</span></a></li>
+      <li class="list-group-item"><a href="{% url 'host_detail' host.id %}"><span class="activeItem">{{ host.name }}</span></a></li>
       {% else %}
-        <li><a href="{% url 'host_detail' host.id %}">{{ host.name }}</a></li>
+        <li class="list-group-item"><a href="{% url 'host_detail' host.id %}">{{ host.name }}</a></li>
         {% endif %}
     {% endfor %}
     </ul>

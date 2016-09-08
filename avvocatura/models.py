@@ -23,17 +23,17 @@ class Host(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=100)
     host = models.CharField(max_length=100)
-    port = models.CharField(max_length=100)
-    service_type = models.CharField(max_length=100)
-    desc = models.CharField(max_length=100)
-    documentation_url = models.CharField(max_length=100)
-    svn = models.CharField(max_length=100)
-    deploy = models.CharField(max_length=100)
-    deps_to = CategoryField()
-    deps_by = CategoryField()
-    user = models.CharField(max_length=100)
-    start = models.CharField(max_length=100)
-    stop = models.CharField(max_length=100)
+    port = models.CharField(max_length=100,blank=True)
+    service_type = models.CharField(max_length=100,blank=True)
+    desc = models.CharField(max_length=100,blank=True)
+    documentation_url = models.CharField(max_length=100,blank=True)
+    svn = models.CharField(max_length=100,blank=True)
+    deploy = models.CharField(max_length=100,blank=True)
+    deps_to = CategoryField(blank=True)
+    deps_by = CategoryField(blank=True)
+    user = models.CharField(max_length=100,blank=True)
+    start = models.CharField(max_length=100,blank=True)
+    stop = models.CharField(max_length=100,blank=True)
     
     def __unicode__(self):
         return self.name
