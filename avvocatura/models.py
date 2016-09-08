@@ -9,9 +9,9 @@ class CategoryField(ListField):
         
 class Host(models.Model):
     name = models.CharField(max_length=100)
-    desc = models.CharField(max_length=100)
-    IP = models.TextField()
-    services = CategoryField()
+    desc = models.CharField(max_length=100,blank=True)
+    IP = models.TextField(blank=True)
+    services = CategoryField(blank=True)
     
     def __unicode__(self):
         return self.name
