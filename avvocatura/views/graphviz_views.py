@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required,user_passes_test
 from ..models import Host,Service
 
 
@@ -14,16 +15,18 @@ def get_or_none(classmodel, **kwargs):
         #print 'non trovato nel DB'
         return None
 
-def index(request):
-    host_list = Host.objects.all()
-    context = {'host_list': host_list}
-    return render(request, 'avvocatura/index.html', context)
+#def index(request):
+#    host_list = Host.objects.all()
+#    context = {'host_list': host_list}
+#    return render(request, 'avvocatura/index.html', context)
 
+@login_required
 def hosts_index(request):
     host_list = Host.objects.all()
     context = {'host_list': host_list}
     return render(request, 'avvocatura/hosts_index.html', context)
 
+@login_required
 def servizi_index(request):
     services_list = Service.objects.all()
     context = {'services_list': services_list}
@@ -39,7 +42,7 @@ def drawDeps(deps_list,dep,node,graph):
         dep_subdeps=dep_object.deps_to
         #print dep_name
         #print dep_subdeps
-        graph.add_edge(node,dep_name)
+        graph.add_edge(dep_name,node)
         #print "Aggiunta relazione da " + node + " a " + dep_name
         if dep not in deps_list:
             #print "Dipendenza ancora da trattare"
@@ -57,12 +60,14 @@ def DrawSubDeps(deps_list,subdeps,node,graph):
         drawDeps(deps_list,subdep,node,graph)
         
 def DrawDepsUp(dep,node,graph):
-    graph.add_node(dep,shape='box',style='filled',color="gray") # adds node 'a'
-    graph.add_edge(dep,node)
+    graph.add_node(dep) # adds node 'a'
+    graph.add_edge(node,dep)
     e=graph.get_node(node)
     e.attr['color']='green'
+    e.attr['shape']='box'
+    e.attr['style']='filled'
 
-
+@login_required
 def host_detail(request,id):
     host_list = Host.objects.all()
     host = Host.objects.get(id=id)  
@@ -83,7 +88,7 @@ def host_detail(request,id):
     context = {'host_list': host_list,'server' : host, 'service_list':service_list}  
     return render(request, 'avvocatura/show_host.html', context)
 
-
+@login_required
 def service_detail(request,id):
     service_list = Service.objects.all()
     service = Service.objects.get(id=id)

@@ -3,7 +3,7 @@ from django.conf.urls import url
 from views import graphviz_views,manage_views,auth_views
 
 urlpatterns = [
-    url(r'^$', graphviz_views.index, name='index'),
+    url(r'^$', auth_views.user_login, name='login'),
     url(r'^login/$', auth_views.user_login, name='login'),
     url(r'^logout/$', auth_views.user_logout, name='logout'),
     url(r'^hosts/$', graphviz_views.hosts_index, name='hosts_index'),

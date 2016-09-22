@@ -8,7 +8,6 @@
   <div class="col-md-4 avv-sidebar">
     <div class="menu">
            
-    <a href="{% url 'index'  %}" class="btn btn-default  active" role="button">Vai alla home</a>
     <a href="{% url 'host_add'  %}" class="btn btn-default active" >Vai a gestione hosts</a><br>
      <h3>Gestione servizi</h3>
     <a href="{% url 'service_add'  %}" class="btn btn-default btn-sm active" >Aggiungi servizio</a>
@@ -99,7 +98,7 @@
     </div>
 <label for="deps_by" class="col-sm-2 control-label">Servizi da cui dipende</label>
     <div class="col-sm-10">
-      <select multiple name="deps_by">
+      <select multiple name="deps_by" size="15">
 <option  value="" > 
 {% for service in service_deps_by_list %}
 <option  value={{service.name}} {% if service.selected %} selected {% endif %}> {{service.name}}
@@ -109,7 +108,7 @@
     </div>
 <label for="deps_to" class="col-sm-2 control-label">Servizi dipendenti</label>
     <div class="col-sm-10">
-      <select multiple name="deps_to">
+      <select multiple name="deps_to" size="15">
 <option  value="" > 
 {% for service in service_deps_to_list %}
 <option  value={{service.name}} {% if service.selected %} selected {% endif %}> {{service.name}} 

@@ -15,7 +15,9 @@
 }
 
 .avv-sidebar{
-    background-color: #CCCCCC;
+    /*background-color: #CCCCCC;*/
+    overflow: auto;
+    max-height: 500px;
 }
 
 .auth{
@@ -24,7 +26,7 @@
     padding:3px;
     margin:3px;
     font-weight:bold;
-    background-color: #CCCCCC;
+    /*background-color: #CCCCCC;*/
 }
 
 .menu{

@@ -7,7 +7,6 @@
     <div class="row">
   <div class="col-md-4 avv-sidebar">
     <div class="menu">
-          <a href="{% url 'index'  %}" class="btn btn-default  active" role="button">Vai alla home</a>
     <a href="{% url 'host_add'  %}" class="btn btn-default active" >Vai a gestione hosts</a><br>
 
             <h3>Gestione servizi</h3>
@@ -42,7 +41,7 @@
 <form class="form-horizontal" action="{% url 'service_add' %}" method="post">
   {% csrf_token %}
  <div class="form-group">
-
+<div class="row">
 <label for="name" class="col-sm-2 control-label">Nome</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="name" name="name"  placeholder="Nome del servizio" >
@@ -59,7 +58,7 @@
     <div class="col-sm-10">
       <input type="text" class="form-control" id="desc" name="desc"  placeholder="Descrizione" >
     </div>
-<label for="documentation_url" class="col-sm-2 control-label">URL doc</label>
+<label for="documentation_url" class="col-sm-2 control-label">Doc URL</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="documentation_url" name="documentation_url"  placeholder="URL documentazione" >
     </div>
@@ -96,24 +95,51 @@
     <div class="col-sm-10">
       <input type="text" class="form-control" id="stop" name="stop"  placeholder="link a documentazione start" >
     </div>
-<label for="deps_by" class="col-sm-2 control-label">Servizi da cui dipende</label>
+    
+<!--<label for="deps_by" class="col-sm-2 control-label">Servizi da cui dipende</label>
     <div class="col-sm-10">
-      <select multiple name="deps_by">
+      <select multiple name="deps_by" size="15">
 {% for service in services_list %}
 <option  value={{service.name}}> {{service.name}}
 </option>
 {% endfor %}
       </select>
     </div>
+    
 <label for="deps_to" class="col-sm-2 control-label">Servizi dipendenti</label>
     <div class="col-sm-10">
-      <select multiple name="deps_to">
+      <select multiple name="deps_to" size="15">
 {% for service in services_list %}
 <option  value={{service.name}}> {{service.name}}
 </option>
 {% endfor %}
       </select>
+    </div>-->
+    
+<label for="deps_by" class="col-sm-2 control-label">Dipendenze</label>   
+ 
+    <div class="col-sm-5">
+        <strong>Servizi da cui dipende</strong>
+            <select class="form-control" multiple name="deps_by" size="15">
+                {% for service in services_list %}
+                <option  value={{service.name}}> {{service.name}}
+                </option>
+{% endfor %}
+            </select>
+       
     </div>
+    <div class="col-sm-5">
+          <strong>Servizi dipendenti</strong>
+            <select class="form-control" multiple name="deps_to" size="15">
+                {% for service in services_list %}
+                <option  value={{service.name}}> {{service.name}}
+                </option>
+{% endfor %}
+            </select>
+       
+    </div>
+</div>   
+    
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">Aggiungi il servizio</button>
     </div>
@@ -121,6 +147,10 @@
 </form>
       
     </div>
+ 
+ 
+ 
+ 
     
     
   </div>
