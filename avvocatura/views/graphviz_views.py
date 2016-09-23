@@ -117,18 +117,22 @@ def service_detail(request,id):
         filename2 = settings.STATIC_ROOT + 'avvocatura/'+ node + '_deps_up.png'
 
     G=pgv.AGraph(strict=False,directed=True)
-    G.add_node(node,shape='box',style='filled',color="green") # adds node 'a'
+    if len(node) >=  1:
+        G.add_node(node,shape='box',style='filled',color="green") # adds node 'a'
     for dep in deps_down:
         #print "LIST:"
         #print deps_list
-        drawDeps(deps_list,dep,node,G)
+        if len(dep) >=  1:
+            drawDeps(deps_list,dep,node,G)
         
     G.layout(prog='dot')    
     G.draw(filename)
     
     G2=pgv.AGraph(strict=False,directed=True)
     for dep in deps_up:
-        DrawDepsUp(dep,node,G2)
+        print 'dep' + dep
+        if len(dep) >=  1:
+            DrawDepsUp(dep,node,G2)
     G2.layout(prog='dot')    
     G2.draw(filename2)
     

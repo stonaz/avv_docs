@@ -5,24 +5,40 @@
     {% block content %}
    
     <div class="row">
-  <div class="col-md-4 avv-sidebar">
-    <div class="menu">
-           
-    <a href="{% url 'host_add'  %}" class="btn btn-default active" >Vai a gestione hosts</a><br>
-     <h3>Gestione servizi</h3>
-    <a href="{% url 'service_add'  %}" class="btn btn-default btn-sm active" >Aggiungi servizio</a>
+  <div class="col-md-5 ">
+           <ul class="nav nav-pills">
+          {% if user.is_authenticated %}
+  <li role="presentation" class="active">
+     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
+  </li>
+    <li role="presentation" class="active">
+     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
+  </li>
+    {% endif %}
+    {% if user.is_superuser %}
+        
+      <li role="presentation" class="active">
+     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
+  </li>
+        <li role="presentation" class="active">
+     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
+  </li>
+     {% endif %}
+</ul>
 
-    </div>
+            <h3>Gestione servizi <a href="{% url 'service_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
+<div class="avv-sidebar">
+   
        {% if services_list %}
-     <table class="table">
+     <table class="table white"  style="width: 80%">
       
     {% for service in services_list %}
     
       <tr>
        <td><strong>{{service.name}}</strong></td>
-        <td><a href="{% url 'service_detail' service.id %}">Visualizza</a></td>
-        <td><a href="{% url 'service_update' service.id %}">Modifica</a></td>
-        <td><a href="{% url 'service_delete' service.id %}">Elimina</a></td>
+       <td><a href="{% url 'service_detail' service.id %}"><button class="btn btn-default">Visualizza</button></a></td>
+        <td><a href="{% url 'service_update' service.id %}"><button class="btn btn-default">Modifica</button></a></td>
+        <td><a href="{% url 'service_delete' service.id %}"><button class="btn btn-default">Elimina</button></a></td>
 
       </tr>
       
@@ -31,8 +47,9 @@
 {% else %}
     <p>No services are available.</p>
 {% endif %}
+</div>
   </div>
-  <div class="col-md-8 avv-content">
+  <div class="col-md-7 avv-content">
     
     <div>
 

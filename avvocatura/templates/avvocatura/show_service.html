@@ -6,8 +6,27 @@
 
 
     <div class="row">
-  <div class="col-md-4 avv-sidebar">
-    <a href="{% url 'hosts_index'  %}" class="btn btn-default active" >Visualizza hosts</a><br>
+  <div class="col-md-5">
+       <ul class="nav nav-pills">
+          {% if user.is_authenticated %}
+  <li role="presentation" class="active">
+     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
+  </li>
+    <li role="presentation" class="active">
+     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
+  </li>
+    {% endif %}
+    {% if user.is_superuser %}
+        
+      <li role="presentation" class="active">
+     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
+  </li>
+        <li role="presentation" class="active">
+     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
+  </li>
+     {% endif %}
+</ul>
+    <div class="avv-sidebar">
     <h3>Servizi</h3>
  
        {% if service_list %}
@@ -23,8 +42,9 @@
 {% else %}
     <p>No services are available.</p>
 {% endif %}
+    </div>
   </div>
-  <div class="col-md-8 avv-content">
+  <div class="col-md-7 avv-content">
     
      <div>
         <strong>Nome servizio: </strong>{{ service.name }}<br>

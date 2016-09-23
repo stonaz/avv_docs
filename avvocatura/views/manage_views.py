@@ -16,7 +16,7 @@ def manage_index(request):
     return render(request, 'avvocatura/manage_index.html', context) 
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser,login_url='/avvocatura/')
 def host_add(request):
     services_list = Service.objects.all()
     host_list = Host.objects.all()
@@ -31,7 +31,7 @@ def host_add(request):
     return render(request, 'avvocatura/add_host.html', context)
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser,login_url='/avvocatura/')
 def service_add(request):
     host_list = Host.objects.all()
     services_list = Service.objects.all()
@@ -55,7 +55,7 @@ def service_add(request):
     return render(request, 'avvocatura/add_service.html', context)
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser,login_url='/avvocatura/')
 def host_update(request,id):
     host = Host.objects.get(id=id)
     message=""
@@ -88,10 +88,11 @@ def host_update(request,id):
     return render(request, 'avvocatura/update_host.html', context)
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser,login_url='/avvocatura/')
 def service_update(request,id):
     service_to_update = Service.objects.get(id=id)
     message=""
+    print request.POST
     if request.POST:
         service_to_update.name=request.POST['name']
         service_to_update.host=request.POST['host']
@@ -133,7 +134,7 @@ def service_update(request,id):
             service_deps_to['selected'] = 0
         service_deps_to_list.append(service_deps_to)
 
-        print service_deps_by_list
+        #print service_deps_by_list
         context = {'service_deps_to_list': service_deps_to_list,'service_deps_by_list': service_deps_by_list,'services_list': services_list,'host_list': host_list,'service_selected':service_to_update,'message':message}
     print message
     return render(request, 'avvocatura/update_service.html', context)

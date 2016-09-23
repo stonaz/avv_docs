@@ -5,24 +5,41 @@
     {% block content %}
     
     <div class="row">
-  <div class="col-md-4 avv-sidebar">
-<div class="menu">
-            
-              
-    <a href="{% url 'service_add'  %}" class="btn btn-default active" >Vai a gestione servizi</a><br>
-    <h3>Gestione hosts</h3>
-    <a href="{% url 'host_add'  %}" class="btn btn-default btn-sm active" >Aggiungi host</a>
-    </div>
+  <div class="col-md-5 ">
+           <ul class="nav nav-pills">
+          {% if user.is_authenticated %}
+  <li role="presentation" class="active">
+     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
+  </li>
+    <li role="presentation" class="active">
+     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
+  </li>
+    {% endif %}
+    {% if user.is_superuser %}
+        
+      <li role="presentation" class="active">
+     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
+  </li>
+        <li role="presentation" class="active">
+     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
+  </li>
+     {% endif %}
+</ul>
+    
+          <h3>Gestione hosts <a href="{% url 'host_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
+   <div class="avv-sidebar">
+   
        {% if host_list %}
-    <table class="table white">
+       
+   <table class="table table-condensed" style="width: 80%">
       
     {% for host in host_list %}
     
       <tr>
        <td><strong>{{host.name}}</strong></td>
-        <td><a href="{% url 'host_detail' host.id %}">Visualizza</a></td>
-        <td><a href="{% url 'host_update' host.id %}">Modifica</a></td>
-        <td><a href="{% url 'host_delete' host.id %}">Elimina</a></td>
+         <td><a href="{% url 'host_detail' host.id %}"><button class="btn btn-default ">Visualizza</button></a></td>
+        <td><a href="{% url 'host_update' host.id %}"><button class="btn btn-default ">Modifica</button></a></td>
+        <td><a href="{% url 'host_delete' host.id %}"><button class="btn btn-default ">Elimina</button></a></td>
 
       </tr>
       
@@ -31,17 +48,29 @@
 {% else %}
     <p>No hosts are available.</p>
 {% endif %}
+
+    </div>
   </div>
-  <div class="col-md-8 avv-content">
-    
-    <div>
-        <h4>Modifica host <span class="activeItem">{{host_selected.name}}</span></h4>
+  <div class="col-md-7 avv-content">
+    <h4><span class="activeItem">{{host_selected.name}}</span></h4>
+     <div class="row">
+       
+        
 
 {% if message %}<p class="text-success""><strong>{{ message }}</strong></p>{% endif %}
 
 <form class="form-horizontal" action="{% url 'host_update' host_selected.id %}" method="post">
   {% csrf_token %}
  <div class="form-group">
+  <div class="col-sm-2 col-sm-offset-10">
+    
+      
+
+      <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> </button>
+      <br><br>
+    </div>
+  <div class="col-sm-11"> 
+
 <label for="name" class="col-sm-2 control-label">Nome</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="name" name="name"  placeholder="Nome host" value="{{host_selected.name}}">
@@ -56,8 +85,8 @@
     </div>
 <label for="name" class="col-sm-2 control-label">Servizi</label>
     <div class="col-sm-10">
-      <select multiple name="services">
-       
+      <select multiple name="services" size="15">
+<option  value=""></option>       
 {% for service in host_services_list %}
 <option  value={{service.name}}
 {% if service.selected %} selected {% endif %}
@@ -66,14 +95,11 @@
 {% endfor %}
       </select>
     </div>
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary">Modifica host</button>
-    </div>
-  </div>  
+
 </form>
 
- </div>     
+ </div>
+  </div>
     </div>
     
     

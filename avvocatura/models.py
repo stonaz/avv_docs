@@ -22,7 +22,7 @@ class Host(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=100)
-    host = models.CharField(max_length=100)
+    host = models.CharField(max_length=100,blank=True)
     port = models.CharField(max_length=100,blank=True)
     service_type = models.CharField(max_length=100,blank=True)
     desc = models.CharField(max_length=100,blank=True)

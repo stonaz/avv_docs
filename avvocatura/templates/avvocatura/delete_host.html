@@ -5,25 +5,41 @@
     {% block content %}
     
     <div class="row">
-  <div class="col-md-4 avv-sidebar">
-<div class="menu">
-            
-              
-    <a href="{% url 'index'  %}" class="btn btn-default  active" role="button">Vai alla home</a>
-    <a href="{% url 'service_add'  %}" class="btn btn-default active" >Vai a gestione servizi</a><br>
-    <h3>Gestione hosts</h3>
-    <a href="{% url 'host_add'  %}" class="btn btn-default btn-sm active" >Aggiungi host</a>
-    </div>
+<div class="col-md-5 ">
+           <ul class="nav nav-pills">
+          {% if user.is_authenticated %}
+  <li role="presentation" class="active">
+     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
+  </li>
+    <li role="presentation" class="active">
+     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
+  </li>
+    {% endif %}
+    {% if user.is_superuser %}
+        
+      <li role="presentation" class="active">
+     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
+  </li>
+        <li role="presentation" class="active">
+     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
+  </li>
+     {% endif %}
+</ul>
+    
+          <h3>Gestione hosts <a href="{% url 'host_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
+   <div class="avv-sidebar">
+   
        {% if host_list %}
-    <table class="table">
+       
+   <table class="table table-condensed" style="width: 80%">
       
     {% for host in host_list %}
     
       <tr>
        <td><strong>{{host.name}}</strong></td>
-         <td><a href="{% url 'host_detail' host.id %}">Visualizza</a></td>
-        <td><a href="{% url 'host_update' host.id %}">Modifica</a></td>
-        <td><a href="{% url 'host_delete' host.id %}">Elimina</a></td>
+         <td><a href="{% url 'host_detail' host.id %}"><button class="btn btn-default ">Visualizza</button></a></td>
+        <td><a href="{% url 'host_update' host.id %}"><button class="btn btn-default ">Modifica</button></a></td>
+        <td><a href="{% url 'host_delete' host.id %}"><button class="btn btn-default ">Elimina</button></a></td>
 
       </tr>
       
@@ -32,8 +48,10 @@
 {% else %}
     <p>No hosts are available.</p>
 {% endif %}
+
+    </div>
   </div>
-  <div class="col-md-8 avv-content">
+  <div class="col-md-7 avv-content">
     
     <div>
 
