@@ -36,7 +36,7 @@
     <div class="row">
        
 
-{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+{% if message %}<h4 class="text-success""><strong>{{ message }}</strong></h4>{% endif %}
 
 <form class="form-horizontal" action="{% url 'host_add' %}" method="post">
   {% csrf_token %}

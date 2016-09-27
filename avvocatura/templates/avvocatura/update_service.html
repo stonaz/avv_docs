@@ -105,7 +105,7 @@
     <div class="col-sm-5">
         <strong>Servizi da cui dipende</strong>
             <select class="form-control" multiple name="deps_by" size="15">
-                <option  value=""></option>  
+                <option  value="">Nessuno</option>  
                 {% for service in service_deps_by_list %}
                 <option  value={{service.name}} {% if service.selected %} selected {% endif %}> {{service.name}}
                 </option>
@@ -116,7 +116,7 @@
     <div class="col-sm-5">
           <strong>Servizi dipendenti</strong>
             <select class="form-control" multiple name="deps_to" size="15">
-                <option  value=""></option>  
+                <option  value="">Nessuno</option>  
                 {% for service in service_deps_to_list %}
                 <option  value={{service.name}} {% if service.selected %} selected {% endif %}> {{service.name}}
                 </option>

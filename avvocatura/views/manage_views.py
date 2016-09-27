@@ -5,7 +5,9 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from ..models import Host,Service
+from utils import *
 from django.contrib.auth.decorators import login_required,user_passes_test
+
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -18,6 +20,7 @@ def manage_index(request):
 @login_required
 @user_passes_test(lambda u: u.is_superuser,login_url='/avvocatura/')
 def host_add(request):
+    message=""
     services_list = Service.objects.all()
     host_list = Host.objects.all()
     if request.POST:
@@ -27,15 +30,19 @@ def host_add(request):
         services = request.POST.getlist('services')
         host=Host(name=name,services=services,IP=ip,desc=desc)
         host.save()
+        message="Host aggiunto"
     menu_id='hosts_mgt'
-    context = {'services_list': services_list,'host_list': host_list,'menu':menu_id}
+    context = {'services_list': services_list,'host_list': host_list,'menu':menu_id,'message':message}
     return render(request, 'avvocatura/add_host.html', context)
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser,login_url='/avvocatura/')
 def service_add(request):
+    message=""
     host_list = Host.objects.all()
     services_list = Service.objects.all()
+    service_to_update_deps_to_before= None
+    service_to_update_deps_by_before= None
     if request.POST:
         name=request.POST['name']
         port=request.POST['port']
@@ -52,8 +59,13 @@ def service_add(request):
         deps_by = request.POST.getlist('deps_by')
         service=Service(name=name,port=port,host=host,desc=desc,service_type=service_type,deps_to=deps_to,deps_by=deps_by,svn=svn,user=user,start=start,stop=stop,documentation_url=documentation_url,deploy=deploy )
         service.save()
+        message="Servizio aggiunto"
+        if deps_to:
+            dependencies_link_add(service,deps_to,'TO')
+        if deps_by:
+            dependencies_link_add(service,deps_to,'BY')
     menu_id='service_mgt'
-    context = {'services_list': services_list,'host_list': host_list,'menu':menu_id}
+    context = {'services_list': services_list,'host_list': host_list,'menu':menu_id,'message':message}
     return render(request, 'avvocatura/add_service.html', context)
 
 @login_required
@@ -93,7 +105,8 @@ def host_update(request,id):
 @user_passes_test(lambda u: u.is_superuser,login_url='/avvocatura/')
 def service_update(request,id):
     service_to_update = Service.objects.get(id=id)
-    service_deps_to_before= service_to_update.deps_to
+    service_to_update_deps_to_before= service_to_update.deps_to
+    service_to_update_deps_by_before= service_to_update.deps_by
     message=""
     #print request.POST
     if request.POST:
@@ -112,32 +125,12 @@ def service_update(request,id):
         service_to_update.deps_to = request.POST.getlist('deps_to')
         service_to_update.save()
         #Aggiornamento delle dipendenze tra i servizi
-        print request.POST.getlist('deps_to')
-        test = len(request.POST.getlist('deps_to')[0])
-        print type(test)
-        if (test < 1):
-            print ('boh)')
-            for dep_to in service_deps_to_before:
-                service_dep_to = Service.objects.get(name=dep_to)
-                print "Servizio ca cui rimuovere: "
-                print service_dep_to
-                existing_deps = service_dep_to.deps_by
-                existing_deps.remove(str(service_to_update))
-                service_dep_to.deps_by=existing_deps
-                service_dep_to.save()
-        else:
-            for dep_to in service_to_update.deps_to:
-                if len(dep_to) > 0:
-                    service_dep_to = Service.objects.get(name=dep_to)
-                    print "Servizio: "
-                    print service_dep_to
-                    existing_deps = service_dep_to.deps_by
-                    if str(service_to_update) not in existing_deps:
-                        existing_deps.append(str(service_to_update))
-                    service_dep_to.deps_by=existing_deps
-                    service_dep_to.save()
-            
-
+        deps_post_to = request.POST.getlist('deps_to')
+        deps_post_by = request.POST.getlist('deps_by')
+        if deps_post_to:
+            dependencies_link(service_to_update_deps_to_before,service_to_update,deps_post_to,'TO')
+        if deps_post_by:
+            dependencies_link(service_to_update_deps_by_before,service_to_update,deps_post_by,'BY')        
         message="Servizio modificato"
     services_list = Service.objects.all()
     host_list = Host.objects.all()
