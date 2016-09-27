@@ -3,30 +3,7 @@
       {% load static %}
 
     {% block content %}
-   
-    <div class="row">
-  <div class="col-md-5 ">
-           <ul class="nav nav-pills">
-          {% if user.is_authenticated %}
-  <li role="presentation" class="active">
-     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
-  </li>
-    <li role="presentation" class="active">
-     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
-  </li>
-    {% endif %}
-    {% if user.is_superuser %}
-        
-      <li role="presentation" class="active">
-     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
-  </li>
-        <li role="presentation" class="active">
-     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
-  </li>
-     {% endif %}
-</ul>
-
-            <h3>Gestione servizi <a href="{% url 'service_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
+<h3>Gestione servizi <a href="{% url 'service_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
 <div class="avv-sidebar">
    
        {% if services_list %}
@@ -109,7 +86,7 @@
     </div>
 <label for="deploy" class="col-sm-2 control-label">Deploy</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="deploy" name="deploy"  value="{{service_selected.deploy}}" >
+      <textarea class="form-control" id="deploy" name="deploy" >{{service_selected.deploy}}</textarea>
     </div>
 <label for="user" class="col-sm-2 control-label">User</label>
     <div class="col-sm-10">

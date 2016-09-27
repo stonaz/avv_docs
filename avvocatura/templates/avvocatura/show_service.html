@@ -4,28 +4,6 @@
 
     {% block content %}
 
-
-    <div class="row">
-  <div class="col-md-5">
-       <ul class="nav nav-pills">
-          {% if user.is_authenticated %}
-  <li role="presentation" class="active">
-     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
-  </li>
-    <li role="presentation" class="active">
-     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
-  </li>
-    {% endif %}
-    {% if user.is_superuser %}
-        
-      <li role="presentation" class="active">
-     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
-  </li>
-        <li role="presentation" class="active">
-     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
-  </li>
-     {% endif %}
-</ul>
     <div class="avv-sidebar">
     <h3>Servizi</h3>
  
@@ -63,7 +41,7 @@
         <strong>Port: </strong>{{ service.port }}<br>
         <strong>User: </strong>{{ service.user }}<br>
         <strong>SVN: </strong>{{ service.svn }}<br>
-        <strong>Deploy: </strong><kbd>{{ service.deploy }}</kbd><br>
+        <strong>Deploy: </strong><br><textarea rows="4" class="formControl code">{{ service.deploy }}</textarea><br>
         <strong>Start: </strong><a href="{{ service.start }}">{{ service.start }}</a><br>
         <strong>Stop: </strong><a href="{{ service.stop }}">{{ service.stop }}</a><br>
 

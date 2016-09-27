@@ -53,6 +53,28 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+              <div class="row">
+                
+  <div class="col-md-5 ">
+           <ul class="nav nav-pills">
+          {% if user.is_authenticated %}
+  <li role="presentation" id="hosts">
+     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
+  </li>
+    <li role="presentation" id="services">
+     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
+  </li>
+    {% endif %}
+    {% if user.is_superuser %}
+        
+      <li role="presentation" id="hosts_mgt">
+     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
+  </li>
+        <li role="presentation" id="service_mgt">
+     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
+  </li>
+     {% endif %}
+</ul>
 
     {% endblock %}
 {% block content %}
@@ -62,7 +84,18 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static "avvocatura/bootstrap-3.3.5-dist/js/bootstrap.min.js" %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script>
+          $( document ).ready(function() {
+    console.log( "ready!" );
+    var menu_id="{{menu}}";
+    console.log (menu_id);
+    var id = document.getElementById(menu_id);
+    $(id).addClass("active");
+});
+    </script>
+
   </body>
 </html>
 {% endblock %}

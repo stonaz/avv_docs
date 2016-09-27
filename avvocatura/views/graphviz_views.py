@@ -23,19 +23,22 @@ def get_or_none(classmodel, **kwargs):
 @login_required
 def hosts_index(request):
     host_list = Host.objects.all()
-    context = {'host_list': host_list}
+    menu_id='hosts'
+    context = {'host_list': host_list,'menu': menu_id}
+    
     return render(request, 'avvocatura/hosts_index.html', context)
 
 @login_required
 def servizi_index(request):
     services_list = Service.objects.all()
-    context = {'services_list': services_list}
+    menu_id='services'
+    context = {'services_list': services_list,'menu': menu_id}
     return render(request, 'avvocatura/services_index.html', context)
 
 def drawDeps(deps_list,dep,node,graph):
     #print "Trovata dipendenza:" + dep
-    
-        
+    if len(node) >=  1:
+        graph.add_node(node,shape='box',style='filled',color="green") # adds node 'a'    
     dep_object=get_or_none(Service,name=dep)
     if dep_object is not None:
         dep_name=dep_object.name
@@ -48,7 +51,7 @@ def drawDeps(deps_list,dep,node,graph):
             #print "Dipendenza ancora da trattare"
             DrawSubDeps(deps_list,dep_subdeps,dep,graph)
     else:
-        graph.add_edge(node,dep)
+        graph.add_edge(dep,node)
     deps_list.append(dep)
         #print "Aggiunta relazione da " + node +  " a " + dep
         #DrawSubDeps(dep_subdeps,dep,graph)
@@ -84,8 +87,8 @@ def host_detail(request,id):
         else:
             s['id']="not present"
         service_list.append(s)
-    print service_list
-    context = {'host_list': host_list,'server' : host, 'service_list':service_list}  
+    menu_id='hosts'
+    context = {'host_list': host_list,'server' : host, 'service_list':service_list,'menu': menu_id}  
     return render(request, 'avvocatura/show_host.html', context)
 
 @login_required
@@ -117,8 +120,6 @@ def service_detail(request,id):
         filename2 = settings.STATIC_ROOT + 'avvocatura/'+ node + '_deps_up.png'
 
     G=pgv.AGraph(strict=False,directed=True)
-    if len(node) >=  1:
-        G.add_node(node,shape='box',style='filled',color="green") # adds node 'a'
     for dep in deps_down:
         #print "LIST:"
         #print deps_list
@@ -135,6 +136,6 @@ def service_detail(request,id):
             DrawDepsUp(dep,node,G2)
     G2.layout(prog='dot')    
     G2.draw(filename2)
-    
-    context = {'service_list': service_list,'filename':context_filename, 'filename2':context_filename2,'service' : service, 'host':h}  
+    menu_id='services'
+    context = {'service_list': service_list,'filename':context_filename, 'filename2':context_filename2,'service' : service, 'host':h,'menu': menu_id}  
     return render(request, 'avvocatura/show_service.html', context)

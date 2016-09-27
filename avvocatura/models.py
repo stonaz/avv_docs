@@ -1,6 +1,7 @@
 from django.db import models
 from djangotoolbox.fields import ListField
 from .forms import StringListField
+from django import forms
 
 
 class CategoryField(ListField):
@@ -9,8 +10,8 @@ class CategoryField(ListField):
         
 class Host(models.Model):
     name = models.CharField(max_length=100)
-    desc = models.CharField(max_length=100,blank=True)
-    IP = models.TextField(blank=True)
+    desc = models.TextField(blank=True)
+    IP = models.CharField(max_length=100, blank=True)
     services = CategoryField(blank=True)
     
     def __unicode__(self):
@@ -28,7 +29,7 @@ class Service(models.Model):
     desc = models.CharField(max_length=100,blank=True)
     documentation_url = models.CharField(max_length=100,blank=True)
     svn = models.CharField(max_length=100,blank=True)
-    deploy = models.CharField(max_length=100,blank=True)
+    deploy = models.TextField(blank=True)
     deps_to = CategoryField(blank=True)
     deps_by = CategoryField(blank=True)
     user = models.CharField(max_length=100,blank=True)

@@ -4,27 +4,7 @@
 
     {% block content %}
     
-    <div class="row">
-  <div class="col-md-5 ">
-           <ul class="nav nav-pills">
-          {% if user.is_authenticated %}
-  <li role="presentation" class="active">
-     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
-  </li>
-    <li role="presentation" class="active">
-     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
-  </li>
-    {% endif %}
-    {% if user.is_superuser %}
-        
-      <li role="presentation" class="active">
-     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
-  </li>
-        <li role="presentation" class="active">
-     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
-  </li>
-     {% endif %}
-</ul>
+
     
           <h3>Gestione hosts <a href="{% url 'host_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
    <div class="avv-sidebar">

@@ -4,31 +4,6 @@
 
     {% block content %}
 
-
-    <div class="row">
-
-  <div class="col-md-5 ">
-    
-    
-    <ul class="nav nav-pills">
-          {% if user.is_authenticated %}
-  <li role="presentation" class="active">
-     <a href="{% url 'hosts_index'  %}"  >Vedi hosts</a>
-  </li>
-    <li role="presentation" class="active">
-     <a href="{% url 'servizi_index'  %}"  >Vedi servizi</a>
-  </li>
-    {% endif %}
-    {% if user.is_superuser %}
-        
-      <li role="presentation" class="active">
-     <a href="{% url 'host_add'  %}"  >Gestione hosts</a>
-  </li>
-        <li role="presentation" class="active">
-     <a href="{% url 'service_add'  %}"  >Gestione servizi</a>
-  </li>
-     {% endif %}
-</ul>
     <div class="avv-sidebar">
   <h3>Hosts</h3>
        {% if host_list %}
