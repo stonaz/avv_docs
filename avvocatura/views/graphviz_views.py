@@ -1,4 +1,5 @@
 import pygraphviz as pgv
+import time
 #from pymongo import MongoClient
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -6,6 +7,7 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required,user_passes_test
 from ..models import Host,Service
+
 
 
 def get_or_none(classmodel, **kwargs):
@@ -108,12 +110,14 @@ def service_detail(request,id):
     else:
         h['id']="not present"
     print h
-
+    
+    ts = str(time.time())
     
     filename = 'avvocatura/static/avvocatura/' + node + '_deps_down.png'
-    context_filename = 'avvocatura/' + node + '_deps_down.png'
+    context_filename = 'avvocatura/' + node + '_deps_down.png?dummy=' + ts
+    
     filename2 = 'avvocatura/static/avvocatura/' + node + '_deps_up.png'
-    context_filename2 = 'avvocatura/' + node + '_deps_up.png'
+    context_filename2 = 'avvocatura/' + node + '_deps_up.png?dummy=' + ts
 
     if settings.DEBUG == False :
         filename = settings.STATIC_ROOT + 'avvocatura/'+ node + '_deps_down.png'

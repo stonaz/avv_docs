@@ -6,20 +6,23 @@
     
 
     
-          <h3>Gestione hosts <a href="{% url 'host_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
-   <div class="avv-sidebar">
+          <a href="{% url 'host_add'  %}">
+                <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+
+          </a></h3>
+   <div>
    
        {% if host_list %}
        
-   <table class="table table-condensed" style="width: 80%">
+   <table class="table table-condensed" style="width: 95%">
       
     {% for host in host_list %}
     
       <tr>
        <td><strong>{{host.name}}</strong></td>
-         <td><a href="{% url 'host_detail' host.id %}"><button class="btn btn-default ">Visualizza</button></a></td>
-        <td><a href="{% url 'host_update' host.id %}"><button class="btn btn-default ">Modifica</button></a></td>
-        <td><a href="{% url 'host_delete' host.id %}"><button class="btn btn-default ">Elimina</button></a></td>
+         <td><a href="{% url 'host_detail' host.id %}"><button class="btn btn-sm ">Visualizza</button></a></td>
+        <td><a href="{% url 'host_update' host.id %}"><button class="btn btn-sm ">Modifica</button></a></td>
+        <td><a href="{% url 'host_delete' host.id %}"><button class="btn btn-sm ">Elimina</button></a></td>
 
       </tr>
       
@@ -31,8 +34,8 @@
 
     </div>
   </div>
-  <div class="col-md-7 avv-content">
-  <h4><button class="btn activeItem">Aggiungi host</button> </h4>
+  <div class="col-md-8 avv-content">
+  
     <div class="row">
        
 
@@ -41,11 +44,9 @@
 <form class="form-horizontal" action="{% url 'host_add' %}" method="post">
   {% csrf_token %}
  <div class="form-group">
-<div class="col-sm-2 col-sm-offset-10">
-    
-      
-
-      <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+<div class="col-sm-6 ">
+  <button class="btn activeItem">Aggiungi host</button> 
+<button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
       <br><br>
     </div>
 <div class="col-sm-11"> 

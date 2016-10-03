@@ -30,7 +30,10 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/avvocatura/hosts/')
+                if request.user.is_superuser:
+                    return HttpResponseRedirect('/avvocatura/hosts/add/')
+                else:                
+                    return HttpResponseRedirect('/avvocatura/hosts/')
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your account is disabled.")
@@ -46,7 +49,10 @@ def user_login(request):
         # blank dictionary object...
         #return render_to_response('rango/login.html', {}, context)
         if request.user.is_authenticated():
-            return HttpResponseRedirect('/avvocatura/hosts/')
+            if request.user.is_superuser:
+                return HttpResponseRedirect('/avvocatura/hosts/add/')
+            else:                
+                return HttpResponseRedirect('/avvocatura/hosts/')
         else:
             return render(request,'avvocatura/login.html', context)
     
