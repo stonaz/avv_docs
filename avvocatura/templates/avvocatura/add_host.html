@@ -5,13 +5,13 @@
     {% block content %}
     
 
-    
+   <br>
           <a href="{% url 'host_add'  %}">
-                <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
-
-          </a></h3>
+                <button type="submit" class="btn btn-sm btn-default">Aggiungi <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+          </a>  
+          
    <div>
-   
+   <br>
        {% if host_list %}
        
    <table class="table table-condensed" style="width: 95%">
@@ -31,39 +31,44 @@
 {% else %}
     <p>No hosts are available.</p>
 {% endif %}
-
     </div>
   </div>
-  <div class="col-md-8 avv-content">
-  
-    <div class="row">
-       
+  <div class="col-md-8 ">
+      <div class="avv-content">
 
+<button class="btn activeItem">Aggiungi host</button>      
 {% if message %}<h4 class="text-success""><strong>{{ message }}</strong></h4>{% endif %}
 
 <form class="form-horizontal" action="{% url 'host_add' %}" method="post">
   {% csrf_token %}
  <div class="form-group">
-<div class="col-sm-6 ">
-  <button class="btn activeItem">Aggiungi host</button> 
+<div class="col-sm-1 col-sm-offset-7 ">
+  
 <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
-      <br><br>
+      <br>
     </div>
-<div class="col-sm-11"> 
+ </div>
+ <div class="form-group">
 <label for="name" class="col-sm-2 control-label">Nome</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="name" name="name"  placeholder="Nome host ( FQDN )" >
     </div>
+    </div>
+ <div class="form-group">
 <label for="name" class="col-sm-2 control-label">Indirizzo IP</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="ip" name="ip"  placeholder="Indirizzo IP" >
     </div>
+    </div>
+ <div class="form-group">
 <label for="name" class="col-sm-2 control-label">Descrizione</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <textarea class="form-control" id="desc" name="desc"  placeholder="Descrizione" ></textarea> 
     </div>
+    </div>
+ <div class="form-group">
 <label for="name" class="col-sm-2 control-label">Servizi</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <select multiple name="services" size="15">
 {% for service in services_list %}
 <option  value={{service.name}}> {{service.name}}
@@ -71,15 +76,12 @@
 {% endfor %}
       </select>
     </div>
+    </div>
+ <div class="form-group">
     
-  </div>  
+ 
 </form>
 
-     
-    </div>
-    </div>
-    
-  </div>
 </div>
     </div>
   {% endblock %}
