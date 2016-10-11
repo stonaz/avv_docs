@@ -98,9 +98,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script>
     $( document ).ready(function() {
-      function conferma_eliminazione(text) {
-    confirm(text);
-}
+//      function conferma_eliminazione(text) {
+//    confirm(text);
+//}
     console.log( "ready!" );
     var menu_id="{{menu}}";
     console.log (menu_id);
@@ -126,11 +126,17 @@
     $("#passhprase_span").hide();
     $("#hidePassword").show();
     
-
-    
-    
   }
   
+});
+  $( "#eliminaHost" ).on( "click", function( event ) {
+          console.log( "elimina host" );
+  return confirm("Eliminare l'host ?")  
+});
+  
+    $( "#eliminaServizio" ).on( "click", function( event ) {
+          console.log( "elimina servizio" );
+  return confirm("Eliminare il servizio ?")  
 });
     
    // $("#password").prop("type", "text");
