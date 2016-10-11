@@ -1,35 +1,12 @@
-{% extends "avvocatura/base.html" %}
+{% extends "avvocatura/base_service_mgmt.html" %}
     
       {% load static %}
 
     {% block content %}
-   
-<h3>Gestione servizi <a href="{% url 'service_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
-<div class="avv-sidebar">
-   
-       {% if services_list %}
-     <table class="table white"  style="width: 80%">
-      
-    {% for service in services_list %}
-    
-      <tr>
-       <td><strong>{{service.name}}</strong></td>
-       <td><a href="{% url 'service_detail' service.id %}"><button class="btn btn-default">Visualizza</button></a></td>
-        <td><a href="{% url 'service_update' service.id %}"><button class="btn btn-default">Modifica</button></a></td>
-        <td><a href="{% url 'service_delete' service.id %}"><button class="btn btn-default">Elimina</button></a></td>
 
-      </tr>
-      
-    {% endfor %}
-    </table>
-{% else %}
-    <p>No services are available.</p>
-{% endif %}
-</div>
-  </div>
-  <div class="col-md-7 avv-content">
+  <div class="col-md-8 ">
     
-    <div>
+    <div class="avv-content">
 
 {% if message %}<p class="text-danger""><strong>{{ message }}</strong></p>{% endif %}
 

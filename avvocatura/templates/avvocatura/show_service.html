@@ -1,7 +1,10 @@
 {% extends "avvocatura/base.html" %}
     
       {% load static %}
-
+      {% block col-left %}               
+  <div class="col-md-3 ">
+    {% endblock col-left%} 
+  
     {% block content %}
 
     <div class="avv-sidebar">
@@ -22,9 +25,9 @@
 {% endif %}
     </div>
   </div>
-  <div class="col-md-8 avv-content">
+  <div class="col-md-9">
     
-     <div>
+     <div class="avv-content">
         <strong>Nome servizio: </strong>{{ service.name }}<br>
         <strong>Host: </strong>
         
@@ -33,22 +36,30 @@
     {% else %}
     <a href="{% url 'host_detail' host.id %}">{{ host.name }}</a>
     {% endif %}
-
 <br>
         <strong>Tipologia servizio: </strong>{{ service.service_type }}<br>
         <strong>Descrizione: </strong>{{ service.desc }}<br>
         <strong>Url documentazione: </strong><a href="{{ service.documentation_url }}">{{ service.documentation_url }}</a><br>
         <strong>Port: </strong>{{ service.port }}<br>
         <strong>User: </strong>{{ service.user }}<br>
+        <strong>Password: </strong><input type="password" id="password" value="{{ service.password }}">
+        <button id="viewPassword">Visualizza</button>
+        <button id="hidePassword" style="display:none">Nascondi</button>
+        <span id="passhprase_span" style="display:none">
+          <form action="javascript:void(0);" style=" display:inline!important;">
+          <strong>Inserisci passphrase: </strong>
+          <input type="text" id="passphrase" >
+          <button id="send_passphrase">OK</button>
+          </form>
+        </span>
+        
+        <br>
         <strong>SVN: </strong>{{ service.svn }}<br>
         <strong>Deploy: </strong><br><textarea rows="4" class="formControl code">{{ service.deploy }}</textarea><br>
         <strong>Start: </strong><a href="{{ service.start }}">{{ service.start }}</a><br>
         <strong>Stop: </strong><a href="{{ service.stop }}">{{ service.stop }}</a><br>
-
-
 <br>
-
-    </div>
+   
     <div class="imageBox">
                     <p>Servizi dipendenti da <strong>{{ service.name }}</strong></p>
 
@@ -59,11 +70,8 @@
             <img src="{% static  filename2  %}" alt="My image"/> 
     </div>
    
-    <div>
   
-    </div>
-
+ </div>
   </div>
-</div>
-    </div>
+
   {% endblock %}

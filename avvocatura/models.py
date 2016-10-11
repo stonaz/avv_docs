@@ -33,6 +33,7 @@ class Service(models.Model):
     deps_to = CategoryField(blank=True)
     deps_by = CategoryField(blank=True)
     user = models.CharField(max_length=100,blank=True)
+    password = models.CharField(max_length=100,blank=True)
     start = models.CharField(max_length=100,blank=True)
     stop = models.CharField(max_length=100,blank=True)
     

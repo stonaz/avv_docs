@@ -1,73 +1,57 @@
-{% extends "avvocatura/base.html" %}
-    
+{% extends "avvocatura/base_service_mgmt.html" %}
       {% load static %}
 
     {% block content %}
-<h3>Gestione servizi <a href="{% url 'service_add'  %}"><button class="btn btn-default ">Aggiungi</button></a></h3>
-<div >
+  <div class="col-md-8 ">
    
-       {% if services_list %}
-     <table class="table white"  style="width: 80%">
-      
-    {% for service in services_list %}
-    
-      <tr>
-       <td><strong>{{service.name}}</strong></td>
-       <td><a href="{% url 'service_detail' service.id %}"><button class="btn btn-sm">Visualizza</button></a></td>
-        <td><a href="{% url 'service_update' service.id %}"><button class="btn btn-sm">Modifica</button></a></td>
-        <td><a href="{% url 'service_delete' service.id %}"><button class="btn btn-sm">Elimina</button></a></td>
-
-      </tr>
-      
-    {% endfor %}
-    </table>
-{% else %}
-    <p>No services are available.</p>
-{% endif %}
-</div>
-  </div>
-  <div class="col-md-7 avv-content ">
-    <h4><button class="btn activeItem">{{service_selected.name}}</button> </h4>
-    <div class="row ">
-      
-    
-   
-        
+    <div class="avv-content  ">
+<button class="btn activeItem">{{service_selected.name}}</button>     
 
 {% if message %}<h4 class="text-success""><strong>{{ message }}</strong></h4>{% endif %}
 
 <form class="form-horizontal" action="{% url 'service_update' service_selected.id %}" method="post">
   {% csrf_token %}
  <div class="form-group">
-
-<div class="col-sm-2 col-sm-offset-8">
+<div class="col-sm-1 col-sm-offset-7">
       <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> </button>
       <br><br>
     </div>
- <div class="col-sm-9"> 
+</div>
+ <div class="form-group">
 <label for="name" class="col-sm-2 control-label">Nome</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="name" name="name"  value="{{service_selected.name}}" >
     </div>
+</div>
+<div class="form-group">
 <label for="name" class="col-sm-2 control-label">Tipo</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <select class="form-control"  name="service_type">
-<option  value="Middleware"> Middleware</option>>
-<option  value="Applicativo"> Applicativo</option>>
-<option  value="Batch"> Batch</option>>
+<option  value = "" selected></option>
+                
+{% for tipo in tipi_servizio %}
+<option  value={{tipo}} {% if service_selected.service_type == tipo %} selected {% endif %}> {{tipo}}
+</option>
+{% endfor %}
       </select>
     </div>
+</div>
+ <div class="form-group">
 <label for="name" class="col-sm-2 control-label">Descrizione</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="desc" name="desc"  value="{{service_selected.desc}}" >
     </div>
+</div>
+ <div class="form-group">
 <label for="documentation_url" class="col-sm-2 control-label">URL doc</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="documentation_url" name="documentation_url"  value="{{service_selected.documentation_url}}" >
     </div>
+</div>
+ <div class="form-group">
 <label for="name" class="col-sm-2 control-label">Host</label>
-    <div class="col-sm-10">
-      <select class="form-control"  name="host" size="15">
+    <div class="col-sm-6">
+      <select class="form-control"  name="host">
         <option  value = "" selected></option>
                 
 {% for host in host_list %}
@@ -76,33 +60,53 @@
 {% endfor %}
       </select>
     </div>
+</div>
+ <div class="form-group">
 <label for="port" class="col-sm-2 control-label">Port</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="port" name="port"  value="{{service_selected.port}}" >
     </div>
+</div>
+ <div class="form-group">
 <label for="svn" class="col-sm-2 control-label">SVN</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="svn" name="svn"  value="{{service_selected.svn}}" >
     </div>
+</div>
+ <div class="form-group">
 <label for="deploy" class="col-sm-2 control-label">Deploy</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <textarea class="form-control" id="deploy" name="deploy" >{{service_selected.deploy}}</textarea>
     </div>
+</div>
+ <div class="form-group">
 <label for="user" class="col-sm-2 control-label">User</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="user" name="user"  value="{{service_selected.user}}" >
     </div>
+</div>
+<div class="form-group">
+<label for="password" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="password" name="password"  value="{{service_selected.password}}" >
+    </div>
+</div>
+ <div class="form-group">
 <label for="start" class="col-sm-2 control-label">Start</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="start" name="start"  value="{{service_selected.stop}}" >
     </div>
+</div>
+ <div class="form-group">
 <label for="stop" class="col-sm-2 control-label">Stop</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <input type="text" class="form-control" id="stop" name="stop"  value="{{service_selected.start}}" >
     </div>
+</div>
+ <div class="form-group">
 <label for="deps_by" class="col-sm-2 control-label">Dipendenze</label>   
  
-    <div class="col-sm-5">
+    <div class="col-sm-3">
         <strong>Servizi da cui dipende</strong>
             <select class="form-control" multiple name="deps_by" size="15">
                 <option  value="">Nessuno</option>  
@@ -113,7 +117,7 @@
             </select>
        
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-3">
           <strong>Servizi dipendenti</strong>
             <select class="form-control" multiple name="deps_to" size="15">
                 <option  value="">Nessuno</option>  
@@ -124,35 +128,15 @@
             </select>
        
     </div>
-<!--<label for="deps_by" class="col-sm-2 control-label">Servizi da cui dipende</label>
-    <div class="col-sm-10">
-      <select multiple name="deps_by" size="15">
-<option  value="" > 
-{% for service in service_deps_by_list %}
-<option  value={{service.name}} {% if service.selected %} selected {% endif %}> {{service.name}}
-</option>
-{% endfor %}
-      </select>
-    </div>
-<label for="deps_to" class="col-sm-2 control-label">Servizi dipendenti</label>
-    <div class="col-sm-10">
-      <select multiple name="deps_to" size="15">
-<option  value="" > 
-{% for service in service_deps_to_list %}
-<option  value={{service.name}} {% if service.selected %} selected {% endif %}> {{service.name}} 
-</option>
-{% endfor %}
-      </select>
-    </div>-->
-  
+</div>
+ <div class="form-group"
+ <div class="col-sm-1 col-sm-offset-7">
+      <button type="submit" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> </button>
+      <br>
+    </div> 
   </div>  
 </form>
-      
-    </div>
-           </div>
-    
-    
-  </div>
+
 </div>
     </div>
   {% endblock %}

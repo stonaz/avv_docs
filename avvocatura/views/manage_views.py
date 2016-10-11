@@ -8,6 +8,7 @@ from ..models import Host,Service
 from utils import *
 from django.contrib.auth.decorators import login_required,user_passes_test
 
+tipi_servizio = ['Batch','Middleware','Applicativo']
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -55,9 +56,12 @@ def service_add(request):
         start = request.POST['start']
         stop = request.POST['stop']
         user = request.POST['user']
+        password = request.POST['password']
         deps_to = request.POST.getlist('deps_to')
         deps_by = request.POST.getlist('deps_by')
-        service=Service(name=name,port=port,host=host,desc=desc,service_type=service_type,deps_to=deps_to,deps_by=deps_by,svn=svn,user=user,start=start,stop=stop,documentation_url=documentation_url,deploy=deploy )
+        service=Service(name=name,port=port,host=host,desc=desc,service_type=service_type,
+                        deps_to=deps_to,deps_by=deps_by,svn=svn,user=user,password=password,
+                        start=start,stop=stop,documentation_url=documentation_url,deploy=deploy )
         service.save()
         message="Servizio aggiunto"
         if deps_to:
@@ -65,7 +69,7 @@ def service_add(request):
         if deps_by:
             dependencies_link_add(service,deps_to,'BY')
     menu_id='service_mgt'
-    context = {'services_list': services_list,'host_list': host_list,'menu':menu_id,'message':message}
+    context = {'services_list': services_list,'host_list': host_list,'menu':menu_id,'message':message,'tipi_servizio':tipi_servizio}
     return render(request, 'avvocatura/add_service.html', context)
 
 @login_required
@@ -118,6 +122,7 @@ def service_update(request,id):
         service_to_update.start=request.POST['start']
         service_to_update.stop=request.POST['stop']
         service_to_update.user=request.POST['user']
+        service_to_update.password=request.POST['password']
         service_to_update.deploy=request.POST['deploy']
         service_to_update.service_type=request.POST['service_type']
         service_to_update.documentation_url=request.POST['documentation_url']
@@ -160,7 +165,9 @@ def service_update(request,id):
 
         #print service_deps_by_list
     menu_id='service_mgt'
-    context = {'service_deps_to_list': service_deps_to_list,'service_deps_by_list': service_deps_by_list,'services_list': services_list,'host_list': host_list,'service_selected':service_to_update,'message':message,'menu':menu_id}
+    context = {'service_deps_to_list': service_deps_to_list,'service_deps_by_list': service_deps_by_list,
+               'services_list': services_list,'host_list': host_list,'service_selected':service_to_update,
+               'message':message,'menu':menu_id,'tipi_servizio':tipi_servizio}
     return render(request, 'avvocatura/update_service.html', context)
 
 @login_required

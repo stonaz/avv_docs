@@ -59,8 +59,11 @@
   </div><!-- /.container-fluid -->
 </nav>
               <div class="row">
-                
+                {% endblock header%}
+ {% block col-left %}               
   <div class="col-md-4 ">
+    {% endblock col-left%}
+    {% block menu %} 
            <ul class="nav nav-pills">
         {% if user.is_authenticated and not user.is_superuser%}
   <li role="presentation" id="hosts">
@@ -81,7 +84,9 @@
      {% endif %}
 </ul>
 
-    {% endblock %}
+{% endblock menu%}
+  {%block list%}
+  {%endblock list%}
 {% block content %}
   
    {% endblock %}
@@ -92,12 +97,43 @@
     <script src="{% static "avvocatura/bootstrap-3.3.5-dist/js/bootstrap.min.js" %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script>
-          $( document ).ready(function() {
+    $( document ).ready(function() {
+      function conferma_eliminazione(text) {
+    confirm(text);
+}
     console.log( "ready!" );
     var menu_id="{{menu}}";
     console.log (menu_id);
     var id = document.getElementById(menu_id);
     $(id).addClass("active");
+    $( "#viewPassword" ).on( "click", function( event ) {
+  console.log( "Show passphrase" );
+  $("#passhprase_span").show(); 
+});
+    $( "#hidePassword" ).on( "click", function( event ) {
+  console.log( "Hide " );
+  $(this).hide();
+  $('#password').get(0).type = 'password';
+  $("#viewPassword").show(); 
+});
+    $( "#send_passphrase" ).on( "click", function( event ) {
+  console.log( "Sent passphrase" );
+  console.log ($("#passphrase").val() );
+  if ($("#passphrase").val() === "pippo"){
+    //$("#password").prop("type", "text");
+    $('#password').get(0).type = 'text';
+    $("#viewPassword").hide();
+    $("#passhprase_span").hide();
+    $("#hidePassword").show();
+    
+
+    
+    
+  }
+  
+});
+    
+   // $("#password").prop("type", "text");
 });
     </script>
 
