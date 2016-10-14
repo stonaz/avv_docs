@@ -1,5 +1,12 @@
+from django.core.exceptions import ObjectDoesNotExist
 from ..models import Service
 
+def get_or_none(classmodel, **kwargs):
+    try:
+        return classmodel.objects.get(**kwargs)
+    except classmodel.DoesNotExist:
+        #print 'non trovato nel DB'
+        return None
 
 def dep_add(dep_kind,service,dep_list):
     for dep in dep_list:

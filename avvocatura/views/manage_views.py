@@ -173,29 +173,32 @@ def service_update(request,id):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def host_delete(request,id):
-    host = Host.objects.get(id=id)
-    host.delete()
-    message="Host eliminato"
     services_list = Service.objects.all()
     host_list = Host.objects.all()
-    menu_id='hosts_mgt'       
+    menu_id='hosts_mgt'
+    host = get_or_none(Host,id=id)
+    #host = Host.objects.get(id=id)
+    if host is None:
+        message="Host non esistente"       
+    else:
+        host.delete()
+        message="Host eliminato"
     context = {'services_list': services_list,'host_list': host_list,'message':message,'menu':menu_id}
     return render(request, 'avvocatura/delete_host.html', context)
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def service_delete(request,id):
-    service = Service.objects.get(id=id)
-    message=""
-   
-    service.delete()
-    message="Servizio eliminato"
-    #print service.deps_by
     services_list = Service.objects.all()
     host_list = Host.objects.all()
     menu_id='service_mgt'
+    service = get_or_none(Service,id=id)
+    if service is None:
+        message="Servizio non esistente"       
+    else:
+        service.delete()
+        message="Servizio eliminato"    
     context = {'services_list': services_list,'host_list': host_list,'message':message,'menu':menu_id}
-    print message
     return render(request, 'avvocatura/delete_service.html', context)
 
 

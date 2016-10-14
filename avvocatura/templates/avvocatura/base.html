@@ -28,40 +28,31 @@
   <body>
         <div class="container-fluid">
           
-          <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a  class="navbar-left" href="#">
-         <img alt="Brand" src="{% static "avvocatura/images/logo.png" %}">
-      </a>
-    </div>
-<p class="navbar-text navbar-left"><h4>Documentazione Sistema Informatico Avvocatura</h4></p>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-
-      <ul class="nav navbar-nav navbar-right">
+              <div class="row">
+                <div class="col-md-5">
+                  <img alt="logo" src="{% static "avvocatura/images/logo.png" %}">
+                </div>
+                <div class="col-md-5">
+                  <div style="margin-top:35px; ">
+                <h3>Documentazione Sistema Informatico</h3>
+                </div>
+                </div>
+                <div class="col-md-2">
+                  <div style="margin-top:15px; ">
+                 
         {% if user.is_authenticated %}
-        <p class="navbar-text"><strong>Utente: </strong>{{ user.username  }}</p>
-          <a class="btn btn-default" href="/avvocatura/logout/" role="button">Logout</a><br />
+        <strong>Utente: </strong>{{ user.username  }}&nbsp;
+        <a class="btn btn-default" href="/avvocatura/logout/" role="button">Logout</a><br />
             
             {% endif %}
-
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-              <div class="row">
+                  </div>
+                </div>
+              </div>
+                <div class="row">
                 {% endblock header%}
  {% block col-left %}               
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     {% endblock col-left%}
     {% block menu %} 
            <ul class="nav nav-pills">

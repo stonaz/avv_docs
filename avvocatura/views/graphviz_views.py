@@ -7,15 +7,9 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required,user_passes_test
 from ..models import Host,Service
+from utils import *
 
 
-
-def get_or_none(classmodel, **kwargs):
-    try:
-        return classmodel.objects.get(**kwargs)
-    except classmodel.DoesNotExist:
-        #print 'non trovato nel DB'
-        return None
 
 #def index(request):
 #    host_list = Host.objects.all()
