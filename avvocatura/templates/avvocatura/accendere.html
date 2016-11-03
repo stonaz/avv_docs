@@ -1,11 +1,11 @@
+{% extends "avvocatura/base.html" %}
 {% load static %}
-<html>
-<head>
-<link rel='stylesheet'   href="{% static "avvocatura/css/doc.css" %}" type='text/css'/>
-</head>
-<body>
-<h1 align='center'> Sequenza di startup generale dei sistemi Avvocatura </h1>
-<h2> Introduzione </h2>
+ {% block col-left %}               
+  <div class="col-md-12">
+    {% endblock col-left%}
+{% block menu %} 
+
+<h2> Sequenza di startup generale dei sistemi  </h2>
 Al fine di provvedere allo startup dei sistemi &egrave necessario procedere obbligatoriamente con il seguente ordine.<br>
 <ol>
 	<li> <a href='#Simplivity'>Accensione Simplivity</a>
@@ -153,6 +153,4 @@ Per accendere i servers NSI, dal Vcenter VMware eseguire il Power On di tutti i 
 I servizi partono i automatico
 <br>
 
-
-</body>
-</html>
+{% endblock menu %} 

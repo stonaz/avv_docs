@@ -1,11 +1,10 @@
+{% extends "avvocatura/base.html" %}
 {% load static %}
-<html>
-<head>
-<link rel='stylesheet'   href="{% static "avvocatura/css/doc.css" %}" type='text/css'/>
-</head>
-<body>
-<h1 align='center'> Sequenza di shutdown generale dei sistemi Avvocatura </h1>
-<h2> Introduzione </h2>
+ {% block col-left %}               
+  <div class="col-md-12">
+    {% endblock col-left%}
+{% block menu %} 
+<h2> Sequenza di shutdown generale dei sistemi  </h2>
 Al fine di provvedere ad uno spegnimento ordinato dei sistemi &egrave necessario procedere obbligatoriamente con il seguente ordine.<br>
 Soprattutto è importante che lo spegnimento di <strong>Alfresco</strong>, <strong>Postgres</strong> e <strong>Oracle</strong> venga eseguito dopo tutti gli altri e nell'ordine indicato.
 <ol>
@@ -223,5 +222,5 @@ Una volta spente tutte le VM, eseguire lo shutdown dei servers OmniCube<br>
 A questo punto eseguire lo shutdown di <strong>simplivity1</strong> e <strong>simplivity2</strong><br>
 <img src="{% static "avvocatura/images/shutdownHOST.png" %}" width="960" height="600"><br><br>
 E' ora possbile spegnere il server <strong>vc55-simpl.ads.it</strong> sul quale gira il Vcenter VMware.
-</body>
-</html>
+
+{% endblock menu %} 
