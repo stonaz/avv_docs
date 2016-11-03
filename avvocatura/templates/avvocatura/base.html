@@ -43,7 +43,9 @@
                  
         {% if user.is_authenticated %}
         <strong>Utente: </strong>{{ user.username  }}&nbsp;
+
         <a class="btn btn-default" href="{% url 'logout'  %}" role="button">Logout</a><br />
+
             
             {% endif %}
                   </div>

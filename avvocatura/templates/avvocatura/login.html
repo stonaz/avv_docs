@@ -16,7 +16,7 @@ In eleifend tincidunt magna, vitae molestie felis tristique ut. Maecenas sit ame
     <div class="col-md-5">
        <div class="avv-content">
         <div class="avv-login">
-          <form id="login_form" class="form-horizontal" method="post" action="/avvocatura/">
+          <form id="login_form" class="form-horizontal" method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Utente</label>

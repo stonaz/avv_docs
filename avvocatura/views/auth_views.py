@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
 def user_login(request):
@@ -31,9 +32,9 @@ def user_login(request):
                 # We'll send the user back to the homepage.
                 login(request, user)
                 if request.user.is_superuser:
-                    return HttpResponseRedirect('/avvocatura/hosts/add/')
+                    return HttpResponseRedirect(reverse('host_add'))
                 else:                
-                    return HttpResponseRedirect('/avvocatura/hosts/')
+                    return HttpResponseRedirect(reverse('hosts_index'))
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your account is disabled.")
@@ -50,9 +51,9 @@ def user_login(request):
         #return render_to_response('rango/login.html', {}, context)
         if request.user.is_authenticated():
             if request.user.is_superuser:
-                return HttpResponseRedirect('/avvocatura/hosts/add/')
+                return HttpResponseRedirect(reverse('host_add'))
             else:                
-                return HttpResponseRedirect('/avvocatura/hosts/')
+                return HttpResponseRedirect(reverse('hosts_index'))
         else:
             return render(request,'avvocatura/login.html', context)
     
@@ -65,4 +66,4 @@ def user_logout(request):
     logout(request)
 
     # Take the user back to the homepage.
-    return HttpResponseRedirect('/avvocatura/')
+    return HttpResponseRedirect(reverse('login'))
