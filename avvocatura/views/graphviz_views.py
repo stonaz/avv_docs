@@ -10,11 +10,11 @@ from ..models import Host,Service
 from utils import *
 
 
-
-#def index(request):
-#    host_list = Host.objects.all()
-#    context = {'host_list': host_list}
-#    return render(request, 'avvocatura/index.html', context)
+@login_required
+def index(request):
+    host_list = Host.objects.all()
+    context = {'host_list': host_list}
+    return render(request, 'avvocatura/index.html', context)
 
 @login_required
 def hosts_index(request):

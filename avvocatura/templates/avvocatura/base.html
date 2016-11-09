@@ -87,13 +87,12 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static "avvocatura/bootstrap-3.3.5-dist/js/tether.min.js" %}"></script>
     <script src="{% static "avvocatura/bootstrap-3.3.5-dist/js/bootstrap.min.js" %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script>
     $( document ).ready(function() {
-//      function conferma_eliminazione(text) {
-//    confirm(text);
-//}
+$('[data-toggle="tooltip"]').tooltip(); 
     console.log( "ready!" );
     var menu_id="{{menu}}";
     console.log (menu_id);

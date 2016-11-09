@@ -42,7 +42,7 @@
         <strong>Url documentazione: </strong><a href="{{ service.documentation_url }}">{{ service.documentation_url }}</a><br>
         <strong>Port: </strong>{{ service.port }}<br>
         <strong>User: </strong>{{ service.user }}<br>
-        <strong>Password: </strong><input type="password" id="password" value="{{ service.password }}">
+        <strong>Password: </strong><input type="password" id="password" value="{{ service.password }}" disabled>
         <button id="viewPassword">Visualizza</button>
         <button id="hidePassword" style="display:none">Nascondi</button>
         <span id="passhprase_span" style="display:none">

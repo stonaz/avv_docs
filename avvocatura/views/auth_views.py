@@ -31,10 +31,11 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                if request.user.is_superuser:
-                    return HttpResponseRedirect(reverse('host_add'))
-                else:                
-                    return HttpResponseRedirect(reverse('hosts_index'))
+                #if request.user.is_superuser:
+                #    return HttpResponseRedirect(reverse('host_add'))
+                #else:
+                #return HttpResponseRedirect(request.GET['next'])
+                return HttpResponseRedirect(reverse('index'))
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your account is disabled.")
@@ -49,13 +50,13 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         #return render_to_response('rango/login.html', {}, context)
-        if request.user.is_authenticated():
-            if request.user.is_superuser:
-                return HttpResponseRedirect(reverse('host_add'))
-            else:                
-                return HttpResponseRedirect(reverse('hosts_index'))
-        else:
-            return render(request,'avvocatura/login.html', context)
+        #if request.user.is_authenticated():
+        #    if request.user.is_superuser:
+        #        return HttpResponseRedirect(reverse('host_add'))
+        #    else:                
+        #        return HttpResponseRedirect(reverse('hosts_index'))
+        #else:
+        return render(request,'avvocatura/login.html', context)
     
 
 
