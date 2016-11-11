@@ -59,6 +59,16 @@
     text-decoration:none;
 }
 
+.code {
+    background: #000;
+    color: white;
+    font-family: monospace;
+    display: block;
+    padding: 5px;
+    border-radius: 5px;
+    width: 50%;
+}
+
 code {
     background: #000;
     color: white;
