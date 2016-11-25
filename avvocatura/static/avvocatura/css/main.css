@@ -79,6 +79,10 @@ code {
     width: 50%;
 }
 
+.sezioni_home{
+  clear: both;
+  margin-top: 5px;
+}
 
 
 .white{

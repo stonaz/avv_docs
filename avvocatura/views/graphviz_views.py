@@ -31,10 +31,14 @@ def servizi_index(request):
     context = {'services_list': services_list,'menu': menu_id}
     return render(request, 'avvocatura/services_index.html', context)
 
-def drawDeps(deps_list,dep,node,graph):
+def drawDeps(deps_list,dep,node,graph,node_shape):
     #print "Trovata dipendenza:" + dep
     if len(node) >=  1:
-        graph.add_node(node,shape='box',style='filled',color="green") # adds node 'a'    
+        graph.add_node(node,shape=node_shape) # adds node 'a'
+        e = graph.get_node(node)
+        if node_shape == "box":
+            e.attr['color']='green'
+            e.attr['style']='filled'
     dep_object=get_or_none(Service,name=dep)
     if dep_object is not None:
         dep_name=dep_object.name
@@ -56,7 +60,7 @@ def drawDeps(deps_list,dep,node,graph):
 def DrawSubDeps(deps_list,subdeps,node,graph):
     for subdep in subdeps:
         #print "Sottodipendenze di %s", node
-        drawDeps(deps_list,subdep,node,graph)
+        drawDeps(deps_list,subdep,node,graph,'ellipse')
         
 def DrawDepsUp(dep,node,graph):
     graph.add_node(dep) # adds node 'a'
@@ -107,27 +111,31 @@ def service_detail(request,id):
     
     ts = str(time.time())
     
-    filename = 'avvocatura/static/avvocatura/' + node + '_deps_down.png'
-    context_filename = 'avvocatura/' + node + '_deps_down.png?dummy=' + ts
+    filename = 'avvocatura/static/avvocatura/graphics/' + node + '_deps_down.png'
+    context_filename = 'avvocatura/graphics/' + node + '_deps_down.png?dummy=' + ts
     
-    filename2 = 'avvocatura/static/avvocatura/' + node + '_deps_up.png'
-    context_filename2 = 'avvocatura/' + node + '_deps_up.png?dummy=' + ts
+    filename2 = 'avvocatura/static/avvocatura/graphics/' + node + '_deps_up.png'
+    context_filename2 = 'avvocatura/graphics/' + node + '_deps_up.png?dummy=' + ts
 
     if settings.DEBUG == False :
-        filename = settings.STATIC_ROOT + 'avvocatura/'+ node + '_deps_down.png'
-        filename2 = settings.STATIC_ROOT + 'avvocatura/'+ node + '_deps_up.png'
+        filename = settings.STATIC_ROOT + 'avvocatura/graphics/'+ node + '_deps_down.png'
+        filename2 = settings.STATIC_ROOT + 'avvocatura/graphics/'+ node + '_deps_up.png'
 
     G=pgv.AGraph(strict=False,directed=True)
+    G.graph_attr.update(size="8,8")
     for dep in deps_down:
         #print "LIST:"
         #print deps_list
         if len(dep) >=  1:
-            drawDeps(deps_list,dep,node,G)
+            drawDeps(deps_list,dep,node,G,'box')
         
-    G.layout(prog='dot')    
+    G.layout(prog='dot')
+    
     G.draw(filename)
     
+    
     G2=pgv.AGraph(strict=False,directed=True)
+    G2.graph_attr.update(size="8,8")
     for dep in deps_up:
         print 'dep' + dep
         if len(dep) >=  1:

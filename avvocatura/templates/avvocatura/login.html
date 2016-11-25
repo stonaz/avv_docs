@@ -9,13 +9,31 @@
         
 {% endblock menu%}
     {% block content %}
-        <img width=50% style="float: right" alt="logo" src="{% static "avvocatura/images/Postgres-DB_deps_down.png" %}">
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rhoncus, erat id dictum eleifend, ante nisi aliquam magna, at consequat metus dui lacinia felis. Maecenas risus lorem, scelerisque sit amet felis quis, aliquam elementum elit. Maecenas porta magna ultrices ligula sagittis, sit amet gravida erat suscipit. Curabitur rhoncus ipsum at odio venenatis tempus. Maecenas blandit maximus velit, non tristique lectus ultrices id. Donec eu metus quis turpis ullamcorper rutrum id a urna. Duis libero nunc, viverra eget odio eget, suscipit viverra urna. Suspendisse vestibulum varius orci, quis suscipit nisi porta suscipit. Nulla eu nulla maximus, rhoncus arcu sed, imperdiet lectus. Integer auctor elit sapien, sed ornare velit hendrerit a. Mauris posuere risus at porta placerat. Donec ac ligula convallis, dictum elit sagittis, venenatis est.
-
-Maecenas finibus nisl nibh, quis posuere augue sodales vel. Sed finibus maximus fringilla. Sed condimentum quam et est ultricies, ac posuere nulla malesuada. Quisque eget dolor in lorem consectetur iaculis. Maecenas euismod orci a enim porta finibus. Nunc condimentum libero ac arcu tristique mollis. In in tellus in quam interdum maximus non et felis. Cras vehicula pellentesque mi in gravida. Nulla nunc metus, eleifend in condimentum eu, eleifend at dui. Etiam ultricies iaculis odio, non convallis orci aliquet quis. Vivamus gravida egestas tempus. Fusce sed diam enim. Nam a turpis egestas, aliquam lorem vitae, cursus nisl. Donec fringilla ut felis non luctus. Suspendisse ut augue ut risus consectetur sagittis pretium molestie felis.
-
-In eleifend tincidunt magna, vitae molestie felis tristique ut. Maecenas sit amet consequat ligula, at lacinia elit. Donec ultricies mollis egestas. Sed varius ipsum quis nibh finibus, a pharetra orci aliquam. Nulla tincidunt tempor nisi at dignissim. Vivamus justo ipsum, maximus ac iaculis sit amet, ultrices ut nisi. Quisque sapien velit, faucibus vel aliquet id, tempor iaculis urna. Proin id condimentum nibh, ac tincidunt purus. Integer id sem nisi. Cras ligula mauris, finibus at turpis porttitor, faucibus lobortis felis. Curabitur iaculis placerat augue non consequat. Cras rutrum venenatis nunc, quis viverra nulla facilisis a. Sed varius fermentum orci, a congue magna viverra quis. Pellentesque id efficitur purus. Curabitur porta, lacus non tincidunt sodales, turpis justo efficitur mauris, a finibus arcu massa vitae neque. Curabitur mi sem, tristique et ipsum a, tincidunt feugiat mauris. 
-
+      <div><h4>In queste pagine è ospitata la documentazione dei sistemi informatici dell'Avvocatura,
+      suddivisa nelle seguenti 3 sezioni:</h4></div>
+      <br>
+      <div class="sezioni_home">
+        <strong>Documentazione dinamica delle dipendenze tra hosts e servizi</strong><br>
+        <img width=40%  style="float: right" alt="logo" src="{% static "avvocatura/images/Postgres-DB_deps_down.png" %}">
+        Le interdipendenze tra gli host e i servizi che ospitano, nonché quelle tra i diversi servizi,
+        sono mostrate in questa sezione, con l'ausilio di grafici, per rendere più chiare le relazioni tra le
+        componenti del sistema informatico dell'Avvocatura.
+        
+      </div>
+      <div class="sezioni_home">
+        <strong>Documentazione procedure di startup e shutdown dei sistemi</strong><br>
+                <img width=40% style="float: right" alt="logo" src="{% static "avvocatura/images/poweronHOST.png" %}">
+        In questa sezione sono illustrate le procedure per stoppare e far ripartire tutti i servizi e gli host dell'Avvocatura
+        nella corretta sequenza, in modo da evitare perdite di dati.
+    
+      </div>
+      <div class="sezioni_home">
+        <img width=40% style="float: right" alt="logo" src="{% static "avvocatura/images/dr.png" %}">
+        <strong>Documentazione procedure di Disaster Recovery</strong><br>
+        Procedure da intraprendere, in caso di Failure completo sul sito di produzione,
+        per il ripristino dei server sul sito di Recovery.
+        
+      </div>
   </div>
     <div class="col-md-5">
        <div class="avv-content">
@@ -40,6 +58,7 @@ In eleifend tincidunt magna, vitae molestie felis tristique ut. Maecenas sit ame
                     <input type="submit" value="Login" />
                 </div>
             </div>
+            <div>{% if message %}<p class="text-danger""><strong>{{ message }}</strong></p>{% endif %}</div>
 </form>
 </div>
 </div>
