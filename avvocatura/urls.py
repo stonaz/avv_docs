@@ -17,9 +17,9 @@ urlpatterns = [
     url(r'^servizi/update/(?P<id>[a-zA-Z0-9_]+)/$', manage_views.service_update, name='service_update'),
     url(r'^hosts/delete/(?P<id>[a-zA-Z0-9_]+)/$', manage_views.host_delete, name='host_delete'),
     url(r'^servizi/delete/(?P<id>[a-zA-Z0-9_]+)/$', manage_views.service_delete, name='service_delete'),
-    url(r'^docs/spegnimento/', docs_views.spegnimento_doc, name='spegnimento_doc'),
-    url(r'^docs/accensione/', docs_views.accensione_doc, name='accensione_doc'),
-    url(r'^static_docs/$', docs_views.serve_secure_static, name='serve_secure_static')
+    #url(r'^docs/spegnimento/', docs_views.spegnimento_doc, name='spegnimento_doc'),
+    #url(r'^docs/accensione/', docs_views.accensione_doc, name='accensione_doc'),
+    url(r'^docs/', docs_views.serve_secure_static, name='serve_secure_static')
 
 
     #url(r'^hosts/$', views.service_detail, name='service_detail'),
