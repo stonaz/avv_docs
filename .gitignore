@@ -1,5 +1,5 @@
 *.pyc
-*.png
+/dynamic-docs/static/dynamic-docs/graphics/*.png
 runserver
 RUN
 settings.py

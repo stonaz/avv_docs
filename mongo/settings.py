@@ -119,7 +119,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'djangotoolbox',
     'django_mongodb_engine',
-    'avvocatura',
+    'dynamic-docs',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
