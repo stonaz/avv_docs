@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
    'default' : {
       'ENGINE' : 'django_mongodb_engine',
-      'NAME' : 'avvocatura'
+      'NAME' : 'avvocaturaDocs'
    }
 }
 
