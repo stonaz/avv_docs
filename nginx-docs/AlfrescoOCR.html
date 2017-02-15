@@ -1,0 +1,60 @@
+<html>
+<head>
+	<meta charset="UTF-8"> 
+<link rel='stylesheet'   href='/css/doc.css' type='text/css'/>
+</head>
+<body>
+	<div class="header-fixed">
+		<div style="float: left">
+			<a href="https://documentazione.ads.it"><button>Home Documentazione</button></a><br>
+			<a href="javascript: history.go(-1)"><button>Pagina precedente</button></a>
+		</div>
+<h1 align='center'> Alfresco OCR Batch </h1>
+
+</div>
+<div class="container">
+
+<h2> 1. Descrizione e Scopo </h2>
+Questo servizio è dedicato alla trasformazione di pdf che provengono da scansioni in modo tale che sia selezionabile il testo. Per fare questo il servizio utilizza il sistema di OCR "Recongition Server" della ABBYY installato ed operativo su boccaccio.ads.it. Il servizio sostituisce il pdf originale con quello passato attaverso l'OCR (e ricalcola la sua impronta informatica) se il documento è stato protocollato nella stessa giornata in cui viene eseguito l'OCR. 
+<br>
+Se il documento è stato protocollato in una giornata anteriore alla corrente il documento originala viene salvato con il nome uuid.pdf nel file system di alfresco nella directory /gfs2/originali. Lo scopo di questo salvataggio è quello di preservare la correttezza delle impronte informatiche che sono state inserite nel Registro Giornaliero di Protocollo che è stato generato e conservato presso Aruba a norma di conservazione digitale.
+
+ <h2> 2. Startup <a class="anchor" name='startup'/> </h2>
+ Accedere alla macchina mediante l'utente alfsync.
+ <code> 
+ > ps -eaf | grep AlfrescoOCR <br>
+ se non appaiono processi:<br>
+ 	> cd AlfrescoOCR/trunk/deploy<br>
+ 	> rm -f resources/.lock<br>
+ 	> rm -f console.loc<br>
+ 	> ./run &<br>
+ 	> tail -f console.pec #Per controllare che il servizio parte e funiona correttamente<br>
+ 	^C<br>
+ </code>
+
+ <h2> 3. Shutdown <a class="anchor" name='shutdown'/> </h2>
+ Per spegnere è necessario killare il processo di AlfrescoOCR:
+ <code> 
+ > ps -eaf | grep AlfrescoOCR # Copiare il PID<br>
+ > kill $PID<br>
+ # Se non termina entro 30 secondi<br>
+ 	> kill -9 $PID<br>
+ </code>
+
+ <h2> 4. Deploy <a class="anchor" name='deploy'/> </h2>
+ Accesso come alfsync:
+ <code> 
+ > cd Alfresco/withFTP<br>
+ > svn up<br>
+ > ant<br>
+ > cp AlfrescoOCR.jar ../trunk/deploy<br>
+ </code>
+
+ <h2>5. Throubleshooting</h2>
+ Qui descrivere che fare in relazione a segnalazioni ricevute
+ <h3> 5.1. Gestione Email automatiche di errore </h3>
+ Descrivere qui il tipo di email e cosa fare.
+</div>
+
+</body>
+</html>
